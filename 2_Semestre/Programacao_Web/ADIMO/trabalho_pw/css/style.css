@@ -1,0 +1,342 @@
+body, ul, li, p {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    font-family: Arial;
+}
+
+a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+/* CABEÇALHO */
+
+.header {
+    background-color: #0076de;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.header a:hover {
+    color: #d5dfe8;
+}
+
+.menu {
+    display: flex;
+    margin-right: 50%;
+}
+
+.menu li {
+    margin-left: 10px;
+}
+
+.menu li a {
+    display: block;
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+/* FIM CABEÇALHO */
+
+/* ÁREA FOOTER */
+
+.footer {
+    margin-top: 20px;
+    background-color: #0076de;
+}
+
+.arranjo_footer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.menu_footer {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.menu_footer ul {
+    display: flex;
+    justify-content: space-around;
+}
+
+.menu_footer li {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.menu_footer a:hover {
+    color: #d5dfe8;
+}
+
+.rede_social {
+    max-width: 300px;
+    margin: 0 auto;
+    padding-right: 40px;
+}
+
+.rede_social ul {
+    display: flex;
+    justify-content: space-around;
+}
+
+.rede_social ul li {
+    margin: 10px;
+}
+
+.rede_social img {
+    height: 50px;
+    width: 50px;
+}
+
+.assinatura p {
+    margin-top: 10px;
+    text-align: center;
+    padding-right: 40px;
+    color: #e7e7e7;
+}
+
+/* FIM ÁREA FOOTER */
+
+/* ÁREA DE BUSCA  */
+.campo_buscar {
+    /* border: solid red; */
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+
+.campo_buscar input {
+    width: 500px;
+    min-width: 50%;
+    height: 30px;
+}
+
+.campo_buscar button {
+    height: 35px;
+}
+
+.conjunto_busca {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.conjunto_busca li {
+    margin-left: 10px;
+}
+
+/* FIM ÁREA DE BUSCA */
+
+/* ÁREA MOSTRAR CASAS */
+
+.mostrar_casas {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.mostrar_casas > div {
+    margin: 10px;
+    padding: 1px;
+    border: 1px solid #d4dadf;
+}
+
+.mostrar_casas img {
+    min-height: 250px;
+    min-width: 400px;
+
+    max-width: 250px;
+    max-height: 400px;
+
+    margin-bottom: 5px;
+}
+
+.mostrar_casas p {
+    text-align: center;
+}
+
+.mostrar_casas button {
+    margin-top: 5px;
+
+    height: 30px;
+    width: 400px;
+    min-width: 250px;
+
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    background-color: #0076de;
+    color: #FFFFFF;
+}
+
+.mostrar_casas button:hover {
+    background-color: #2f8fe2;
+}
+
+/* FIM ÁREA MOSTRAR CASAS */
+
+/* ÁREA CADASTRO */
+
+.section_cadastro {
+    height: 700px;
+}
+
+.cadastro {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.cadastro h2 {
+    text-align: center;
+}
+
+.div_input {
+    /* border: solid red; */
+    margin-bottom: 10px;
+}
+
+.div_input input {
+    width: 400px;
+    min-width: 200px;
+
+    height: 30px;
+}
+
+.btn_submit {
+    margin-top: 10px;
+
+    min-height: 40px;
+    min-width: 400px;
+
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    background-color: #0076de;
+    color: #FFFFFF;
+}
+
+.btn_submit:hover {
+    background-color: #2f8fe2;
+}
+
+/* FIM ÁREA CADASTRO */
+
+/* ÁREA FAVORITOS */
+
+.section_favoritos {
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 850px;
+    margin: 20px auto;
+}
+
+.section_favoritos li {
+    margin: 10px 0px;
+}
+
+.section_favoritos img {
+    max-width: 400px;
+    min-width: 400px;
+
+    max-height: 250px;
+    min-height: 250px;
+}
+
+.section_favoritos ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: flex-end;
+}
+
+.imagem_casa {
+    grid-column: 1;
+    grid-row: 1 / 3;
+
+    display: flex;
+    justify-content: space-around;
+}
+
+.descricao_casa {
+    padding: 90px 0px;
+    text-align: start;
+}
+
+.conjunto_btn {
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn_favorito {
+    height: 30px;
+    width: 210px;
+
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    background-color: #0076de;
+    color: #FFFFFF;
+}
+
+.btn_favorito:hover {
+    background-color: #2f8fe2;
+}
+
+/* FIM ÁREA FAVORITOS */
+
+/* ÁREA DETALHES CASA */
+
+.amostragem_detalhe {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.amostragem_detalhe img {
+    width: 640;
+    height: 400px;
+}
+
+.amostragem_detalhe ul {
+    display: grid;
+    grid-column: 1fr;
+    grid-row: 1fr 1fr;
+    justify-content: center;
+}
+
+.conjunto_btn_detalhe {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn_detalhe {
+    height: 30px;
+    width: 100px;
+
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    background-color: #0076de;
+    color: #FFFFFF;
+}
+
+.btn_detalhe:hover {
+    background-color: #2f8fe2;
+}
+
+.info_detalhe h2 {
+    padding: 10px 20px;
+    border: 1px solid #000000;
+    background-color: #0076de;
+    color: #FFFFFF;
+}
+
+.info_detalhe div {
+    margin: 0px 20px;
+}
+
+/* FIM DETALHES CASA */

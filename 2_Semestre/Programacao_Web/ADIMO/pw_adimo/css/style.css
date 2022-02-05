@@ -1,0 +1,191 @@
+* {
+    background-color: #24252A;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+li, a {
+    text-decoration: none;
+    color: white;
+}
+
+.logo {
+height: 100px;
+}
+
+.nav_list {
+    list-style: none;
+    margin-right: 100px;
+}
+
+.nav_list li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav_list li a {
+    transition: all 0.3s ease 0s;
+}
+
+.nav_list li a:hover {
+    color: #0088A9;
+}
+
+.espaco {
+    margin-right: 30px;
+}
+.search_section {
+    max-width: 600px;
+    margin: auto;
+}
+
+.search_list {
+    list-style: none;
+}
+
+.search_list li {
+    padding-left: 40px;
+    display: inline-block;
+    padding: 10px;
+    background-color: #24252A;
+}
+
+#search_bar {
+    height: 30px;
+    width: 400px;
+    background-color: white;
+    border-color: grey;
+}
+
+#search_btn {
+    height: 33px;
+    width: 70px;
+    background-color: grey;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+#search_img {
+    height: 15px;
+    background-color: rgba(128, 128, 128, 0);
+}
+
+#search_btn:hover{
+    background-color: darkgrey;
+}
+
+.painel_casa {
+    margin: auto;
+    padding: 10px;
+}
+
+.painel_casa li {
+    display: inline-block;
+    padding-bottom: 30px;
+}
+
+.img_casa {
+    height: 300px;
+    width: 400px;
+}
+
+.casa_ordem {
+    list-style: none;
+}
+
+.casa_list {
+    margin: 10px 100px;
+}
+
+.casa_list li {
+    display: inline-flex;
+}
+
+.btn_detalhe {
+    height: 40px;
+    width: 300px;
+    background-color: grey;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    margin-right: 15px;
+    font-size: 16px;
+    font-style: inherit;
+    font-weight: bold;
+}
+
+.btn_detalhe:hover {
+    background-color: darkgrey;
+}
+
+section {
+  border: 5px solid red;
+}
+
+.lable_check {
+    height: 40px;
+    width: 300px;
+    background-color: grey;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    margin-right: 15px;
+    font-size: 16px;
+    font-style: inherit;
+    font-weight: bold;
+}
+
+/* AREA PARA FORMS CADASTRO */
+
+.form_section {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+.div_input {
+    margin: auto;
+    padding-bottom: 20px;
+}
+
+.form_section ul {
+    list-style: none;
+    margin: auto;
+}
+
+.form_section li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.input_cadastro {
+    background-color: white;
+    width: 400px;
+    height: 30px;
+}
+
+.btn_submit {
+    height: 40px;
+    width: 300px;
+    background-color: grey;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    font-size: 16px;
+    font-style: inherit;
+    font-weight: bold;
+}
+
+.btn_submit:hover {
+    background-color: darkgray;
+}

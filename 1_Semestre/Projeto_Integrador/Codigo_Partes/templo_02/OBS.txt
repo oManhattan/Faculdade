@@ -1,0 +1,4 @@
+Rapazeada, fiz o commit do código, o que eu fiz basicammente, foi, ao invés de randomizar os números numa equação de segundo grau foi, randomizar a questão inteira em si
+com 3 opções de questão pra cada parte do temmplo, e evoluindo de maneira a ajudar o jogador a entender melhor a equação, começando com exercícios bem simples de resolução,
+perguntando os coeficiêntes de uma equação, depois indo para a própria resolução com soma e produto ou bhaskara, e por último problemmas envolvendo equação de segundo grau
+completa e incompleta, eu não consegui fazer a adição das funções por falta de tempo, se tiverem algum dia suave essa semana, podemos resolver essa questão.
