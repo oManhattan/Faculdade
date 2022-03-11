@@ -36,7 +36,7 @@ public class Operacoes {
     public static void remover(int id) {
         int indice = -1;
 
-        for (int i = 0; i < n - 1; i++) {
+        for (int i = 0; i < n; i++) {
             if (lista[i].getId() == id) {
                 indice = i;
                 break;
@@ -44,7 +44,7 @@ public class Operacoes {
         }
 
         if (indice != -1) {
-            for (int i = indice; i < n - 1; i++) {
+            for (int i = indice; i < n; i++) {
                 lista[i] = lista[i + 1];
             }
 
@@ -56,7 +56,7 @@ public class Operacoes {
      * Organiza o array por titulo
      */
     public static void sortByTitulo() {
-        mergeString(0, lista.length, lista);
+        mergeString(0, n, lista);
     }
 
     /**
@@ -77,7 +77,7 @@ public class Operacoes {
         }
 
         int mid = (low + high) / 2;
-
+        
         if (lista[mid].getTitulo().compareToIgnoreCase(s) < 0) {
             return binarySearch(s, mid + 1, high);
         } else if (lista[mid].getTitulo().compareToIgnoreCase(s) > 0) {
