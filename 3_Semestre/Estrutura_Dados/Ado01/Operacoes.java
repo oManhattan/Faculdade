@@ -59,12 +59,37 @@ public class Operacoes {
         mergeString(0, lista.length, lista);
     }
 
-    public static int searchTitle() {
-        
+    /**
+     * Busca o índice do primeiro título encontrado de forma binária. Portanto é
+     * necessário organizar o Array utilizando a função sortByTitle()
+     * 
+     * @param s título que deseja se encontrado
+     * @return retorna uma String concendo o número do índice encontrado ou -1 caso não encontre nenhum
+     *         resultado, id, autor, titulo e preco.
+     */
+    public static String searchTitle(String s) {
+        return binarySearch(s, 0, lista.length - 1);
+    }
+
+    private static String binarySearch(String s, int low, int high) {
+        if (low > high) {
+            return "-1";
+        }
+
+        int mid = (low + high) / 2;
+
+        if (lista[mid].getTitulo().compareToIgnoreCase(s) < 0) {
+            return binarySearch(s, mid + 1, high);
+        } else if (lista[mid].getTitulo().compareToIgnoreCase(s) > 0) {
+            return binarySearch(s, low, mid - 1);
+        } else {
+            return Integer.toString(mid) + ", " + lista[mid].toString();
+        }
     }
 
     /**
      * Adiciona mais esapaço ao array para adicionar mais Livro()
+     * 
      * @return
      */
     private static Livro[] alocarNovoArray() {
@@ -122,5 +147,4 @@ public class Operacoes {
         }
     }
 
-    
 }

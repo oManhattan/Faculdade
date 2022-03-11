@@ -18,7 +18,7 @@ public class Livro {
 
     @Override
     public String toString() {
-        return "autor: " + autor + "\tid: " + id + "\tpreco: " + preco + "\ttitulo: " + titulo;
+        return id + ", " + autor + ", " + titulo + ", " + preco; 
     }
 
     public int getId() {

@@ -13,11 +13,7 @@ public class UsaLivro {
         Operacoes.inserir(livro05);
         Operacoes.inserir(livro03);
 
-
-        Operacoes.mostrar();
-        System.out.println("\n\n");
-
         Operacoes.sortByTitulo();
-        Operacoes.mostrar();
+        System.out.println(Operacoes.searchTitle("B"));
     }
 }
