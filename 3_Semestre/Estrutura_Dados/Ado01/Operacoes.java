@@ -52,6 +52,7 @@ public class Operacoes {
         }
     }
 
+<<<<<<< Updated upstream
     /**
      * Organiza o array pelo id de cada livro
      */
@@ -64,6 +65,64 @@ public class Operacoes {
      */
     public static void sortByTitle() {
         mergeString(0, lista.length, lista);
+=======
+    public static Livro[] sortById() {
+        quickSort(lista, 0, lista.length - 1);
+        return lista;
+    }
+
+    // public static Livro[] sortByAutor(Livro[] l) {
+
+    // }
+
+    // public static Livro[] sortByTitulo(Livro[] l) {
+
+    // }
+
+    // public static Livro[] sortByPreco(Livro[] l) {
+
+    // }
+
+    private static void quickSort(Livro[] vetor, int inicio, int fim) {
+        if (fim < inicio) {
+            int indexPivo = dividir(vetor, inicio, fim);
+
+            quickSort(vetor, inicio, indexPivo - 1);
+            quickSort(vetor, indexPivo + 1, fim);
+        }
+    }
+
+    private static int dividir(Livro[] vetor, int inicio, int fim) {
+        int pivo, pontEsq, pontDir = fim;
+        pontEsq = inicio + 1;
+        pivo = vetor[inicio].getId();
+
+        while (pontEsq <= pontDir) {
+
+            while (pontEsq <= pontDir && vetor[pontEsq].getId() <= pivo) {
+                pontEsq++;
+            }
+
+            while (pontDir >= pontEsq && vetor[pontDir].getId() > pivo) {
+                pontDir--;
+            }
+
+            if (pontEsq < pontDir) {
+                trocar(vetor, pontDir, pontEsq);
+                pontEsq++;
+                pontDir--;
+            }
+        }
+
+        trocar(vetor, inicio, pontDir);
+        return pontDir;
+    }
+
+    private static void trocar(Livro[] vetor, int i, int j) {
+        Livro temp = vetor[i];
+        vetor[i] = vetor[j];
+        vetor[j] = temp;
+>>>>>>> Stashed changes
     }
 
     private static Livro[] alocarNovoArray() {
