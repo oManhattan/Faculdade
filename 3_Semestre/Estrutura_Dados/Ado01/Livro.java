@@ -16,6 +16,11 @@ public class Livro {
         this.preco = preco;
     }
 
+    @Override
+    public String toString() {
+        return "autor: " + autor + "\tid: " + id + "\tpreco: " + preco + "\ttitulo: " + titulo;
+    }
+
     public int getId() {
         return id;
     }
@@ -46,10 +51,5 @@ public class Livro {
 
     public void setPreco(double preco) {
         this.preco = preco;
-    }
-
-    @Override
-    public String toString() {
-        return "autor: " + autor + "\tid: " + id + "\tpreco: " + preco + "\ttitulo: " + titulo;
     }
 }

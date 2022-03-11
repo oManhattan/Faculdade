@@ -44,12 +44,26 @@ public class Operacoes {
         }
 
         if (indice != -1) {
-            for (int i = indice; i < n - 1; i++) {
+            for (int i = indice; i < n - 1 ; i++) {
                 lista[i] = lista[i + 1];
             }
 
             n--;
         }
+    }
+
+    /**
+     * Organiza o array pelo id de cada livro
+     */
+    public static void sortById() {
+        mergeSort(0, lista.length, lista);
+    }
+
+    /**
+     * Organiza o array em ordem alfabética e por autor
+     */
+    public static void sortByTitle() {
+        mergeString(0, lista.length, lista);
     }
 
     private static Livro[] alocarNovoArray() {
@@ -58,4 +72,101 @@ public class Operacoes {
         return novaLista;
     }
 
+    private static void mergeSort(int inicio, int tamanho, Livro[] vetor) {
+        if (inicio < tamanho - 1) {
+            int meio = (inicio + tamanho) / 2;
+            mergeSort(inicio, meio, vetor);
+            mergeSort(meio, tamanho, vetor);
+            intercalarString(inicio, meio, tamanho, vetor);
+        }
+    }
+
+    private static void mergeString(int inicio, int tamanho, Livro[] vetor) {
+        if (inicio < tamanho - 1) {
+            int meio = (inicio + tamanho) / 2;
+            mergeSort(inicio, meio, vetor);
+            mergeSort(meio, tamanho, vetor);
+            intercalar(inicio, meio, tamanho, vetor);
+        }
+    }
+
+    private static void intercalarString(int inicio, int meio, int tamanho, Livro[] vetor) {
+        int i;
+        int j;
+        int k;
+
+        Livro[] aux = new Livro[tamanho - inicio];
+
+        i = inicio;
+        j = meio;
+        k = 0;
+
+        while(i < meio && j < tamanho) {
+            if(vetor[i].getTitulo().compareToIgnoreCase(vetor[j].getTitulo()) <= 0) {
+                aux[k] = vetor[i];
+                k++;
+                i++;
+            } else {
+                aux[k] = vetor[j];
+                k++;
+                j++;
+            }
+        }
+
+        while (i < meio) {
+            aux[k] = vetor[i];
+            k++;
+            i++;
+        }
+
+        while (j < tamanho) {
+            aux[k] = vetor[j];
+            k++;
+            j++;
+        }
+
+        for (i = inicio; i < tamanho; i++) {
+            vetor[i] = aux[i - inicio];
+        }
+    }
+
+    private static void intercalar(int inicio, int meio, int tamanho, Livro[] vetor) {
+        int i;
+        int j;
+        int k;
+
+        Livro[] aux = new Livro[tamanho - inicio];
+
+        i = inicio;
+        j = meio;
+        k = 0;
+
+        while (i < meio && j < tamanho) {
+            if (vetor[i].getId() <= vetor[j].getId()) {
+                aux[k] = vetor[i];
+                k++;
+                i++;
+            } else {
+                aux[k] = vetor[j];
+                k++;
+                j++;
+            }
+        }
+
+        while (i < meio) {
+            aux[k] = vetor[i];
+            k++;
+            i++;
+        }
+
+        while (j < tamanho) {
+            aux[k] = vetor[j];
+            k++;
+            j++;
+        }
+
+        for (i = inicio; i < tamanho; i++) {
+            vetor[i] = aux[i - inicio];
+        }
+    }
 }
