@@ -8,7 +8,6 @@ public class Forma {
     public Forma(double x, double y) {
         this.x = x;
         this.y = y;
-        System.out.println((0.0f));
     }
 
     public double calcularArea() {
