@@ -1,0 +1,291 @@
+Integrantes: 
+
+Matheus Cavalcanti de Arruda
+Gustavo Tozeti Herculano
+
+Exercício 1
+
+Elabore um projeto Java com uma classe Livro com os atributos: 
+• int id;
+• String autor;
+• String titulo;
+• double preço;
+
+Escreva os métodos getters e setters, dois construtores (no mínimo) e o método toString.
+
+Solução
+
+public class Livro {
+
+    private int id;
+    private String autor;
+    private String titulo;
+    private double preco;
+
+    public Livro() {
+
+    }
+
+    public Livro(int id, String autor, String titulo, Double preco) {
+        this.id = id;
+        this.autor = autor;
+        this.titulo = titulo;
+        this.preco = preco;
+    }
+
+    @Override
+    public String toString() {
+        return id + ", " + autor + ", " + titulo + ", " + preco; 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+}
+
+Exercício 2
+
+Na segunda classe, defina:
+• Um array de objetos (defina-o como array da classe);
+• Um método para inserir objetos (use a lógica paråa redimensionar o array);
+• Um método para remover por id, um objeto do array;
+• *Um método para ordenar os dados.
+• *Um método para realizar a busca binária por título, retorne todas as informações relacionadas ao objeto pesquisado.
+
+Solução
+
+public class Operacoes {
+
+    private static Livro[] lista = new Livro[1];
+    private static int n = 0;
+
+    /**
+     * Insere um objeto Livro() no array de Livro[]
+     * 
+     * @param livro Objeto Livro()
+     */
+    public static void inserir(Livro livro) {
+        if (n == lista.length) {
+            lista = alocarNovoArray();
+        }
+
+        lista[n] = new Livro();
+        lista[n] = livro;
+        n++;
+    }
+
+    /**
+     * Itera todos os itens no array de Livro[]
+     */
+    public static void mostrar() {
+
+        for (int i = 0; i < n; i++) {
+            System.out.println(lista[i].toString());
+        }
+    }
+
+    /**
+     * Remove o primeiro objeto Livro() encontrado no array Livro()[]
+     * 
+     * @param id id do Livro()
+     */
+    public static void remover(int id) {
+        int indice = -1;
+
+        for (int i = 0; i < n; i++) {
+            if (lista[i].getId() == id) {
+                indice = i;
+                break;
+            }
+        }
+
+        if (indice != -1) {
+            for (int i = indice; i < n; i++) {
+                lista[i] = lista[i + 1];
+            }
+
+            n--;
+        }
+    }
+
+    /**
+     * Organiza o array por titulo
+     */
+    public static void sortByTitulo() {
+        mergeString(0, n, lista);
+    }
+
+    /**
+     * Busca o índice do primeiro título encontrado de forma binária. Portanto é
+     * necessário organizar o Array utilizando a função sortByTitle()
+     * 
+     * @param s título que deseja se encontrado
+     * @return retorna uma String concendo o número do índice encontrado ou -1 caso não encontre nenhum
+     *         resultado, id, autor, titulo e preco.
+     */
+    public static String searchTitle(String s) {
+        return binarySearch(s, 0, lista.length - 1);
+    }
+
+    private static String binarySearch(String s, int low, int high) {
+        if (low > high) {
+            return "-1";
+        }
+
+        int mid = (low + high) / 2;
+        
+        if (lista[mid].getTitulo().compareToIgnoreCase(s) < 0) {
+            return binarySearch(s, mid + 1, high);
+        } else if (lista[mid].getTitulo().compareToIgnoreCase(s) > 0) {
+            return binarySearch(s, low, mid - 1);
+        } else {
+            return Integer.toString(mid) + ", " + lista[mid].toString();
+        }
+    }
+
+    /**
+     * Adiciona mais esapaço ao array para adicionar mais Livro()
+     * 
+     * @return
+     */
+    private static Livro[] alocarNovoArray() {
+        Livro[] novaLista = new Livro[lista.length + 4];
+        System.arraycopy(lista, 0, novaLista, 0, lista.length);
+        return novaLista;
+    }
+
+    private static void mergeString(int inicio, int tamanho, Livro[] vetor) {
+        if (inicio < tamanho - 1) {
+            int meio = (inicio + tamanho) / 2;
+            mergeString(inicio, meio, vetor);
+            mergeString(meio, tamanho, vetor);
+            intercalarString(inicio, meio, tamanho, vetor);
+        }
+    }
+
+    private static void intercalarString(int inicio, int meio, int tamanho, Livro[] vetor) {
+        int i;
+        int j;
+        int k;
+
+        Livro[] aux = new Livro[tamanho - inicio];
+
+        i = inicio;
+        j = meio;
+        k = 0;
+
+        while (i < meio && j < tamanho) {
+            if (vetor[i].getTitulo().compareToIgnoreCase(vetor[j].getTitulo()) <= 0) {
+                aux[k] = vetor[i];
+                k++;
+                i++;
+            } else {
+                aux[k] = vetor[j];
+                k++;
+                j++;
+            }
+        }
+
+        while (i < meio) {
+            aux[k] = vetor[i];
+            k++;
+            i++;
+        }
+
+        while (j < tamanho) {
+            aux[k] = vetor[j];
+            k++;
+            j++;
+        }
+
+        for (i = inicio; i < tamanho; i++) {
+            vetor[i] = aux[i - inicio];
+        }
+    }
+}
+
+Exercício 3
+
+Utilização das classes acima em um main
+
+Solução
+
+public class UsaLivro {
+    public static void main(String[] args) throws Exception {
+        
+        // Instanciando os objetos para a atividade.
+
+        Livro livro01 = new Livro(1, "Clóvis de Barros", "Em Busca De Nós Mesmos", 22.69);
+        Livro livro02 = new Livro(2, "Rick Warren", "Para Que Estou Na Terra? Uma Vida com Propósitos", 41.90);
+        Livro livro03 = new Livro(3, "Charlie Donlea", "Não Confie Em Ninguém", 23.99);
+        Livro livro04 = new Livro(4, "Brené Brown", "A Coragem De Ser Imperfeito", 22.41);
+        Livro livro05 = new Livro(5, "Jeff Lemire", "Royal City Volume 1 - Segredos Em Família", 17.46);
+        Livro livro06 = new Livro(6, "Lewis Carrol", "Alice no País das Maravilhas", 51.23);
+        Livro livro07 = new Livro(7, "David Crow", "The Pale-Faced Lie", 10.00);
+        Livro livro08 = new Livro(8, "Laura Dave", "The Last Thing He Told Me", 58.42);
+        Livro livro09 = new Livro(9, "George S Clason", "O Homem Mais Rico da Babilônia", 16.90);
+        Livro livro10 = new Livro(10, "Haemin Sunim", "As Coisas Que Você Só Vê Quando Desacelera", 37.40);
+
+        // Adicionando os objetos ao Array
+
+        Operacoes.inserir(livro01);
+        Operacoes.inserir(livro10);
+        Operacoes.inserir(livro04);
+        Operacoes.inserir(livro05);
+        Operacoes.inserir(livro09);
+        Operacoes.inserir(livro06);
+        Operacoes.inserir(livro07);
+        Operacoes.inserir(livro02);
+        Operacoes.inserir(livro03);
+        Operacoes.inserir(livro08);
+
+        System.out.println("Imprimir o Array no console de forma desorganizada\n");
+
+        Operacoes.mostrar();
+        System.out.println("\n");
+
+        System.out.println("Organizando o Array de A - Z e imprimindo\n");
+
+        Operacoes.sortByTitulo();
+        Operacoes.mostrar();
+        System.out.println("\n");
+
+        System.out.println("Com o array ordenado será feita a  busca do título \"The Last Thing He Told Me\"\n");
+
+        System.out.println(Operacoes.searchTitle("The Last Thing He Told Me"));
+        System.out.println("\n");
+
+        System.out.println("E por fim será removido o livro com id 7\n");
+
+        Operacoes.remover(7);
+        Operacoes.mostrar();
+    }
+}
