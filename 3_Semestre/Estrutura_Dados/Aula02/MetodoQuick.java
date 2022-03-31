@@ -1,4 +1,5 @@
-import java.util.Arrays;
+package Aula02;
+
 import java.util.Random;
 
 public class MetodoQuick {

@@ -1,3 +1,5 @@
+package Ado01;
+
 public class Operacoes {
 
     private static Livro[] lista = new Livro[1];
