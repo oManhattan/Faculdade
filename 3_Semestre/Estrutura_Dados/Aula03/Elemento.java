@@ -25,7 +25,6 @@ public class Elemento {
 
     @Override
     public String toString() {
-        return "Elemento{" + "objeto=" + objeto + ", prox=" + prox + '}';
+        return "Elemento [objeto=" + objeto + ", prox=" + prox + "]";
     }
-
 }
