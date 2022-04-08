@@ -78,4 +78,8 @@ public abstract class Usuario {
     public void esqueceuSenha(String emailCadastrado) {
 
     }
+
+    public void sair() {
+        
+    }
 }
