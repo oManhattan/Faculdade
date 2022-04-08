@@ -1,4 +1,4 @@
-public class Usuario {
+public abstract class Usuario {
     private int id;
     private String nome;
     private String email;
@@ -69,5 +69,13 @@ public class Usuario {
  
     public String criptografarSenha() {
         return null;
+    }
+
+    public void alterarSenha(String senhaAtual) {
+
+    }
+
+    public void esqueceuSenha(String emailCadastrado) {
+
     }
 }

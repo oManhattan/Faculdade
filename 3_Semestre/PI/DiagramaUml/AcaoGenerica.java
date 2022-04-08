@@ -1,4 +1,4 @@
-public class AcaoGenerica {
+public abstract class AcaoGenerica {
     
     private Cliente cliente;
     private Usuario usuario;
