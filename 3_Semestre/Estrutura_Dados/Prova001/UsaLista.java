@@ -11,11 +11,9 @@ public class UsaLista {
         lista.inserir(a2);
         lista.inserir(a3);
         lista.inserir(a4);
-
-        for (Object o : lista.exibirLista()) {
-            System.out.println(o.toString());
-        }
         
+        // lista.exibirLista();
+
         System.out.println(lista.mediaGlobal());
     }
 }

@@ -1,8 +1,10 @@
-import java.util.ArrayList;
+
 
 public class ListaSimples {
 
     private Elemento inicio = null, atual, aux;
+
+    
 
     /**
      * Adiciona um Aluno na lista
@@ -22,16 +24,14 @@ public class ListaSimples {
     /**
      * Retorna um array de objeto com todos os alunos inseridos na lista
      */
-    public Object[] exibirLista() {
+    public void exibirLista() {
         Elemento x = inicio;
-        ArrayList<Object> lista = new ArrayList<Object>();
 
         while (x != null) {
-            lista.add(x.getObjeto());
+            Aluno a = (Aluno) x.getObjeto();
+            System.out.println(a.toString());
             x = x.getProx();
         }
-
-        return lista.toArray();
     }
 
     /**
@@ -101,22 +101,14 @@ public class ListaSimples {
         return false;
     }
 
-    public String mediaGlobal() {
+    private double getMediaGlobal() {
         int contador = 0;
-        int abaixoMedia = 0;
-        int acimaMedia = 0;
         double mediaTotal = 0;
 
         Elemento x = inicio;
 
         while (x != null) {
             Aluno a = (Aluno) x.getObjeto();
-
-            if (a.getMedia() >= 6) {
-                acimaMedia++;
-            } else {
-                abaixoMedia++;
-            }
             
             mediaTotal += a.getMedia();
             contador++;
@@ -124,9 +116,31 @@ public class ListaSimples {
             x = x.getProx();
         }
 
-        mediaTotal = mediaTotal / contador;
+        return mediaTotal / contador;
+    }
 
-        return String.format("A média global é: %.2f\nAluno abaixo da média: %d\nAlunos acima da média: %d\n", mediaTotal, abaixoMedia, acimaMedia);
+    public String mediaGlobal() {
+        
+        double mediaTotal = getMediaGlobal();
+
+        int acima = 0;
+        int abaixo = 0;
+
+        Elemento e = inicio;
+
+        while (e != null) {
+            Aluno a = (Aluno) e.getObjeto();
+
+            if (a.getMedia() >= mediaTotal) {
+                acima++;
+            } else {
+                abaixo++;
+            }
+
+            e = e.getProx();
+        }
+
+        return String.format("Média Global: %.2f\nAlunos igual ou acima: %d\nAlunos abaixo: %d", mediaTotal, acima, abaixo);
     }
 
     // Classe interna

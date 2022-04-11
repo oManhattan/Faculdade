@@ -2,18 +2,24 @@ public class Aluno {
 
     private static long ura;
 
-    private final String name;
+    private String name;
     private double nota1;
     private double nota2;
     private double media;
-    private final long ra;
-    
+    private long ra;
+
+    public Aluno() {
+
+    }
+
     public Aluno(String name, double nota1, double nota2) {
         this.name = name;
         this.nota1 = nota1;
         this.nota2 = nota2;
 
         this.ra = 2000 + ura++;
+
+        this.media = setMedia();
     }
 
     @Override
@@ -45,12 +51,11 @@ public class Aluno {
         this.nota2 = nota2;
     }
 
-    private void setMedia() {
-        this.media = (this.getNota1() * 0.3) + (this.getNota2() * 0.7);
+    private double setMedia() {
+        return (this.getNota1() * 0.3) + (this.getNota2() * 0.7);
     }
 
     public double getMedia() {
-        setMedia();
         return media;
     }
 }

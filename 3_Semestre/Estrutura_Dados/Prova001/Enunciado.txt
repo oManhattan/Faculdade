@@ -1,7 +1,7 @@
 Elabore uma lista simplesmente encadeada para armazenar em seus
 elementos, objetos da classe Alunos, crie uma classe ListaSimples.
 
-(1,0 ponto) Na classe Aluno, escreva:
+(2,0 ponto) Na classe Aluno, escreva:
 a) Atributos: nome (String), ra (long), nota1, nota2, media (double);
 b) Dois construtores (Um padrão e outro com todos os parâmetros),
 setters e getters;
