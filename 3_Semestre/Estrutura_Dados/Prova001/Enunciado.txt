@@ -1,0 +1,23 @@
+Elabore uma lista simplesmente encadeada para armazenar em seus
+elementos, objetos da classe Alunos, crie uma classe ListaSimples.
+
+(1,0 ponto) Na classe Aluno, escreva:
+a) Atributos: nome (String), ra (long), nota1, nota2, media (double);
+b) Dois construtores (Um padrão e outro com todos os parâmetros),
+setters e getters;
+c) Ao construir, crie uma lógica para atribuir a sequencial, a partir de
+2000.
+d) Escreva um método privado que determine a média. Ele deve ser
+invocado ao insiancar a classe
+A média é obtida por:
+nota1 + 0.3 + nota2 * 0.7
+
+(4,0 pontos) Na classe ListaSimples, escreva:
+a) Um método para inserir um elemento na lista e um método para
+remover um elemento, por Ra, da lista;
+b) Um metodo para exibir um relatorio completo de todos os alunos com
+nota1, nota2 e média calculada:
+c Um metodo para gerar um relatorio estatistico que informe a média
+global dos alunos e a quantidade de alunos acima da média e abaixo
+da med
+d) Escreva um metodo para inserir um elemento no inicio da lista
