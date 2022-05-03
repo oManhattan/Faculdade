@@ -17,33 +17,33 @@ public class UsaLista {
         ListaSimples lista = new ListaSimples();
 
         // Adicionando alguns alunos na forma padrão
-        lista.inserir(a1);
-        lista.inserir(a2);
-        lista.inserir(a3);
-        lista.inserir(a4);
-        lista.inserir(a5);
-        lista.inserir(a6);
+        // lista.inserir(a1);
+        // lista.inserir(a2);
+        // lista.inserir(a3);
+        // lista.inserir(a4);
+        // lista.inserir(a5);
+        // lista.inserir(a6);
 
         // Adicionando o restante na primeira posição
         lista.inserirPrimeiro(a7);
-        lista.inserirPrimeiro(a8);
-        lista.inserirPrimeiro(a9);
-        lista.inserirPrimeiro(a10);
+        // lista.inserirPrimeiro(a8);
+        // lista.inserirPrimeiro(a9);
+        // lista.inserirPrimeiro(a10);
 
         System.out.println("Imprimindo todos os alunos\n");
         // Imprimindo todos os alunos
         lista.exibirLista();
 
-        System.out.println("=================\nRemovendo o aluno com RA 2008 e reimprimindo a lista\n");
+        // System.out.println("=================\nRemovendo o aluno com RA 2008 e reimprimindo a lista\n");
 
         // Aluno de RA 2008 foi expulso
-        lista.remover(2008);
+        // lista.remover(2008);
 
         // Exibindo o restante dos alunos
-        lista.exibirLista();
+        // lista.exibirLista();
 
-        System.out.println("=================\nMédia global com o contador de alunos abaixo e acima da própria\n");
+        // System.out.println("=================\nMédia global com o contador de alunos abaixo e acima da própria\n");
         // Relatório estatístico de todos os alunos
-        System.out.println(lista.mediaGlobal());
+        // System.out.println(lista.mediaGlobal());
     }
 }
