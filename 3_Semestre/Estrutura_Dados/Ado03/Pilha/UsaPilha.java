@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class UsaLista {
+public class UsaPilha {
 
     public static void main(String[] args) {
 

@@ -1,62 +1,60 @@
-public class Pilha {
+public class Fila {
     
     private Elemento inicio = null, atual, aux;
 
-    public void push(Object objeto) {
+    public void enqueue(Object objeto) {
+
         if (inicio == null) {
             inicio = new Elemento(objeto, null, null);
             aux = inicio;
-        } else {
-            atual = new Elemento(objeto, null, aux);
-            aux.setProximo(atual);
-            aux = atual;
-        }
-
-        System.out.println("--> Valor adicionado com sucesso\n");
-    }
-
-    public void show() {
-        
-        if (inicio == null) {
-            System.out.println("--> Não possui itens para imprimir");
+            atual = inicio;
+            System.out.println("--> Valor adicionado com sucesso.");
             return;
         }
 
-        Elemento x = atual;
+        atual = new Elemento(objeto, null, aux);
+        aux.setProximo(atual);
+        aux = atual;
+        System.out.println("--> Valor adicionado com sucesso.");
+    }
+
+    public void show() {
+        if (inicio == null) {
+            System.out.println("--> Não possui itens para imprimir.");
+            return;
+        }
+
+        Elemento x = inicio;
 
         System.out.print("--> [");
-        while (x != null) {
+        while (x != null) { 
+
             System.out.print(x.getObjeto());
 
-            if (x == inicio) {
-                System.out.print("");
-            } else {
+            if (x != atual) {
                 System.out.print(", ");
             }
 
-            x = x.getAnterior();
+            x = x.getProximo();
         }
         System.out.println("]");
     }
 
-    public void pop() {
-        
+    public void dequeue() {
         if (inicio == null) {
-            System.out.println("--> Não há itens para remover");
+            System.out.println("--> Não há itens para remover.");
             return;
         }
 
-        if (inicio == aux) {
+        if (inicio == atual) {
             inicio = null;
-            System.out.println("--> Valor removido com sucesso\n");    
+            System.out.println("--> Valor removido com sucesso.");
             return;
         }
 
-        aux = atual.getAnterior();
-        atual = aux;
-        atual.setProximo(null);
-
-        System.out.println("--> Valor removido com sucesso\n");
+        inicio = inicio.getProximo();
+        inicio.setAnterior(null);
+        System.out.println("--> Valor removido com sucesso.");
     }
 
     public boolean empty() {
@@ -67,47 +65,45 @@ public class Pilha {
         return false;
     }
 
-    public String top() {
-
+    public String front() {
         if (inicio == null) {
-            return "A lista não possui itens.";
+            return "--> A fila não possui itens.";
         }
 
-        return atual.toString();
+        return inicio.toString();
     }
 
-    public int count() {
+    public int size() {
 
         if (inicio == null) {
             return 0;
         }
 
         Elemento x = inicio;
-        int contador = 0;
+        int count = 0;
 
         while (x != null) {
-            contador++;
+            count++;
             x = x.getProximo();
         }
 
-        return contador;
+        return count;
     }
 
     private class Elemento {
-
         private Object objeto;
         private Elemento proximo;
         private Elemento anterior;
+        
+        public Elemento(Object objeto, Fila.Elemento proximo, Fila.Elemento anterior) {
+            this.objeto = objeto;
+            this.proximo = proximo;
+            this.anterior = anterior;
+        }
 
         @Override
         public String toString() {
             return objeto.toString();
-        }
-
-        public Elemento(Object objeto, Pilha.Elemento proximo, Pilha.Elemento anterior) {
-            this.objeto = objeto;
-            this.proximo = proximo;
-            this.anterior = anterior;
         }
 
         public Object getObjeto() {
