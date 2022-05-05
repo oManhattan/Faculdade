@@ -23,17 +23,17 @@ public class Pilha {
             return;
         }
 
-        Elemento x = atual;
+        Elemento x = inicio;
 
         System.out.print("--> [");
         while (x != null) {
             System.out.print(x.getObjeto());
 
-            if (x != inicio) {
+            if (x != atual) {
                 System.out.print(", ");
             }
 
-            x = x.getAnterior();
+            x = x.getProximo();
         }
         System.out.println("]");
     }

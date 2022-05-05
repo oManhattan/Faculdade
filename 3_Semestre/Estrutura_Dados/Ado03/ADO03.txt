@@ -1,0 +1,468 @@
+Nome participantes:
+
+Gustavo Tozeti Herculano - 1142275851
+Matheus Cavalcanti de Arruda - 1142097286
+
+= = = = = = = = = = =
+
+Estruturas de dados lineares, fundamentais em computação, de uso temporário e auxiliar, com regra de acesso aos dados armazenados. Pode-se encontrar uma grande gama de aplicações para essas estruturas lineares.
+ 
+Estruturas Lineares com regra de Acesso
+ 
+Fila
+Pilha
+Política de acesso
+O Primeiro elemento que entra é o primeiro elemento que sai. (FIFO – First In, First Out).
+O Último elemento que entra é o primeiro elemento que sai. (LIFO – Last In, First Out).
+Aplicações
+Buffer de impressão.
+Memória pilha (execução de funções/métodos).
+Operações básicas
+enqueue(valor) – inserir(valor)
+dequeue() – remover()
+empty() – vazia()
+front() – frente()
+size() – tamanho()
+push(valor) – inserir(valor)
+pop() – remover()
+empty() – vazia()
+top() – topo()
+size() – tamanho()
+ 
+Implemente uma pilha e uma fila usando a lista duplamente encadeada passada em aula. Elas devem realizar as operações conforme a tabela acima.
+
+= = = = = = = = = = = 
+
+Fila.java
+
+Código:
+
+public class Fila {
+    
+    private Elemento inicio = null, atual, aux;
+
+    public void enqueue(Object objeto) {
+
+        if (inicio == null) {
+            inicio = new Elemento(objeto, null, null);
+            aux = inicio;
+            atual = inicio;
+            System.out.println("--> Valor adicionado com sucesso.");
+            return;
+        }
+
+        atual = new Elemento(objeto, null, aux);
+        aux.setProximo(atual);
+        aux = atual;
+        System.out.println("--> Valor adicionado com sucesso.");
+    }
+
+    public void show() {
+        if (inicio == null) {
+            System.out.println("--> Não possui itens para imprimir.");
+            return;
+        }
+
+        Elemento x = inicio;
+
+        System.out.print("--> [");
+        while (x != null) { 
+
+            System.out.print(x.getObjeto());
+
+            if (x != atual) {
+                System.out.print(", ");
+            }
+
+            x = x.getProximo();
+        }
+        System.out.println("]");
+    }
+
+    public void dequeue() {
+        if (inicio == null) {
+            System.out.println("--> Não há itens para remover.");
+            return;
+        }
+
+        if (inicio == atual) {
+            inicio = null;
+            System.out.println("--> Valor removido com sucesso.");
+            return;
+        }
+
+        inicio = inicio.getProximo();
+        inicio.setAnterior(null);
+        System.out.println("--> Valor removido com sucesso.");
+    }
+
+    public boolean empty() {
+        if (inicio == null) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public String front() {
+        if (inicio == null) {
+            return "--> A fila não possui itens.";
+        }
+
+        return inicio.toString();
+    }
+
+    public int size() {
+
+        if (inicio == null) {
+            return 0;
+        }
+
+        Elemento x = inicio;
+        int count = 0;
+
+        while (x != null) {
+            count++;
+            x = x.getProximo();
+        }
+
+        return count;
+    }
+
+    private class Elemento {
+        private Object objeto;
+        private Elemento proximo;
+        private Elemento anterior;
+        
+        public Elemento(Object objeto, Fila.Elemento proximo, Fila.Elemento anterior) {
+            this.objeto = objeto;
+            this.proximo = proximo;
+            this.anterior = anterior;
+        }
+
+        @Override
+        public String toString() {
+            return objeto.toString();
+        }
+
+        public Object getObjeto() {
+            return objeto;
+        }
+
+        public void setObjeto(Object objeto) {
+            this.objeto = objeto;
+        }
+
+        public Elemento getProximo() {
+            return proximo;
+        }
+
+        public void setProximo(Elemento proximo) {
+            this.proximo = proximo;
+        }
+
+        public Elemento getAnterior() {
+            return anterior;
+        }
+
+        public void setAnterior(Elemento anterior) {
+            this.anterior = anterior;
+        }
+    }
+}
+
+= = = = = = = = = = =
+
+UsaFila.java
+
+Código:
+
+import java.util.Scanner;
+
+public class UsaFila {
+
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+        Fila fila = new Fila();
+        boolean isRunning = true;
+
+        while (isRunning) {
+
+            System.out.println(
+                    "[ 1 ] - Enqueue | [ 2 ] - Dequeue | [ 3 ] - Show | [ 4 ] - Front | [ 5 ] - Size | [ 6 ] - Empty \t [ 7 ] - Sair\n");
+
+            System.out.print("Escolha uma opção: ");
+
+            int userInput = 0;
+
+            try {
+                userInput = input.nextInt();
+            } catch (Exception e) {
+                System.out.println("--> Valor inválido");
+                continue;
+            }
+
+            switch (userInput) {
+                case 1:
+                    try {
+                        System.out.print("Valor para ser inserido: ");
+                        int valor = input.nextInt();
+                        fila.enqueue(valor);
+                        System.out.println("Valor inserido com sucesso.\n");
+                    } catch (Exception e) {
+                        System.out.println("Valor deve ser um número inteiro.");
+                    }
+                    break;
+                case 2:
+                    fila.dequeue();
+                    break;
+                case 3:
+                    fila.show();
+                    break;
+                case 4:
+                    System.out.println("--> Priemrio da fila: " + fila.front());
+                    break;
+                case 5:
+                    System.out.println("--> Tamanho: " + fila.size());
+                    break;
+                case 6:
+                    System.out.println(fila.empty());
+                    break;
+                case 7:
+                    // Alguma coisa
+                    break;
+                default:
+                    System.out.println("--> Opção não existe.");
+            }
+            System.out.println(" ");
+        }
+
+        input.close();
+    }
+
+}
+
+= = = = = = = = = = =
+
+Pilha.java
+
+Código:
+
+public class Pilha {
+    
+    private Elemento inicio = null, atual, aux;
+
+    public void push(Object objeto) {
+        if (inicio == null) {
+            inicio = new Elemento(objeto, null, null);
+            aux = inicio;
+            atual = inicio;
+        } else {
+            atual = new Elemento(objeto, null, aux);
+            aux.setProximo(atual);
+            aux = atual;
+        }
+
+        System.out.println("--> Valor adicionado com sucesso\n");
+    }
+
+    public void show() {
+        
+        if (inicio == null) {
+            System.out.println("--> Não possui itens para imprimir");
+            return;
+        }
+
+        Elemento x = inicio;
+
+        System.out.print("--> [");
+        while (x != null) {
+            System.out.print(x.getObjeto());
+
+            if (x != atual) {
+                System.out.print(", ");
+            }
+
+            x = x.getProximo();
+        }
+        System.out.println("]");
+    }
+
+    public void pop() {
+        
+        if (inicio == null) {
+            System.out.println("--> Não há itens para remover");
+            return;
+        }
+
+        if (inicio == aux) {
+            inicio = null;
+            System.out.println("--> Valor removido com sucesso\n");    
+            return;
+        }
+
+        aux = atual.getAnterior();
+        atual = aux;
+        atual.setProximo(null);
+
+        System.out.println("--> Valor removido com sucesso\n");
+    }
+
+    public boolean empty() {
+        if (inicio == null) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public String top() {
+
+        if (inicio == null) {
+            return "A pilha não possui itens.";
+        }
+
+        return atual.toString();
+    }
+
+    public int count() {
+
+        if (inicio == null) {
+            return 0;
+        }
+
+        Elemento x = inicio;
+        int contador = 0;
+
+        while (x != null) {
+            contador++;
+            x = x.getProximo();
+        }
+
+        return contador;
+    }
+
+    private class Elemento {
+
+        private Object objeto;
+        private Elemento proximo;
+        private Elemento anterior;
+
+        @Override
+        public String toString() {
+            return objeto.toString();
+        }
+
+        public Elemento(Object objeto, Pilha.Elemento proximo, Pilha.Elemento anterior) {
+            this.objeto = objeto;
+            this.proximo = proximo;
+            this.anterior = anterior;
+        }
+
+        public Object getObjeto() {
+            return objeto;
+        }
+
+        public void setObjeto(Object objeto) {
+            this.objeto = objeto;
+        }
+
+        public Elemento getProximo() {
+            return proximo;
+        }
+
+        public void setProximo(Elemento proximo) {
+            this.proximo = proximo;
+        }
+
+        public Elemento getAnterior() {
+            return anterior;
+        }
+
+        public void setAnterior(Elemento anterior) {
+            this.anterior = anterior;
+        }
+    }
+}
+
+= = = = = = = = = = =
+
+UsaPilha.java
+
+Código:
+
+import java.util.Scanner;
+
+public class UsaPilha {
+
+    public static void main(String[] args) {
+
+        boolean runningProgram = true;
+        Pilha lista = new Pilha();
+
+        while (runningProgram) {
+
+            System.out.print("\nEscolha uma opção:  ");
+            System.out.print("[ 1 ] - Push |");
+            System.out.print(" [ 2 ] - Pop |");
+            System.out.print(" [ 3 ] - Empty |");
+            System.out.print(" [ 4 ] - Count |");
+            System.out.print(" [ 5 ] - Print |");
+            System.out.print(" [ 6 ] - Top |");
+            System.out.print(" [ 7 ] - End");
+
+            Scanner input = new Scanner(System.in);
+
+            int userInput = 0;
+
+            try {
+                System.out.print("\nEntrada: ");
+                userInput = input.nextInt();
+                System.out.println(" ");
+            } catch (Exception e) {
+                System.out.println("Valor informado é inválido. Por favor insira um valor inteiro\n");
+                continue;
+            }
+
+            switch (userInput) {
+                case 1:
+                    System.out.print("Valor a ser inserido: ");
+
+                    int valor = 0;
+
+                    try {
+                        valor = input.nextInt();
+                        System.out.println(" ");
+                    } catch (Exception e) {
+                        System.out.println("--> Valor não inserido por ser inválido\n");
+                    }
+
+                    lista.push(valor);
+                    break;
+                case 2:
+                    lista.pop();
+                    break;
+                case 3:
+                    System.out.println("--> " + lista.empty() + "\n");
+                    break;
+                case 4:
+                    System.out.println("--> Count: " + lista.count() + "\n");
+                    break;
+                case 5:
+                    lista.show();
+                    System.out.println(" ");
+                    break;
+                case 6:
+                    System.out.println("--> Top: " + lista.top());
+                    break;
+                case 7:
+                    System.out.println("--> Programa encerrado");
+                    runningProgram = false;
+                    input.close();
+            }
+        }
+    }
+}
+
+ = = = = = = = = =
