@@ -31,8 +31,6 @@ public class O_Jogo {
 	public static final String BOLD = "\u001B[1m";
 	public static final String SUB = "\u001B[4m";
 	
-	
-
 	// CORES DO FUNDO DO TEXTO
 	public static final String RESET_BACKGROUND = "\u001B[0m";
 	public static final String BLACK_BACKGROUND = "\u001B[40m";
