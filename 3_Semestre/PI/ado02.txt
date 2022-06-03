@@ -1,0 +1,7 @@
+echo "Hello, what is your name?"
+read name
+echo "Welcome, $name"
+echo -n "The release version of your OS is "
+lsb_release -d -s
+echo -n "and the architecture is "
+arch
