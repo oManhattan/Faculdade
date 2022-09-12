@@ -1,8 +1,12 @@
-public class Singleton {
+package com.singleton;
 
+public class Singleton {
+    
     private static Singleton singleton = new Singleton();
 
-    private Singleton() { }
+    public Singleton() {
+
+    }
 
     public static Singleton getInstance() {
         return singleton;

@@ -1,0 +1,37 @@
+--> Norte, PIB: 221,50
+----> Rondônia, PIB: 27,00
+----> Acre, PIB: 8,70
+----> Amazonas, PIB: 64,00
+----> Roraima, PIB: 6,90
+----> Pará, PIB: 88,00
+----> Amapá, PIB: 8,90
+----> Tocantins, PIB: 18,00
+
+--> Nordeste, PIB: 551,00
+----> Maranhão, PIB: 52,00
+----> Piauí­, PIB: 24,00
+----> Ceará, PIB: 87,00
+----> Rio Grande do Norte, PIB: 36,00
+----> Paraíba, PIB: 35,00
+----> Pernambuco, PIB: 104,00
+----> Alagoas, PIB: 28,00
+----> Sergipe, PIB: 26,00
+----> Bahia, PIB: 159,00
+
+--> Sudeste, PIB: 2294,00
+----> Minas Gerais, PIB: 386,00
+----> Espí­rito Santo, PIB: 97,00
+----> Rio de Janeiro, PIB: 462,00
+----> São Paulo, PIB: 1349,00
+
+--> Sul, PIB: 671,00
+----> Paraná, PIB: 239,00
+----> Santa Catarina, PIB: 169,00
+----> Rio Grande do Sul, PIB: 263,00
+
+--> Centro-Oeste, PIB: 395,00
+----> Mato Grosso do Sul, PIB: 49,00
+----> Mato Grosso, PIB: 71,00
+----> Goiás, PIB: 111,00
+----> Distrito Federal, PIB: 164,00
+
