@@ -7,6 +7,7 @@ import csv
 # 1) Crie um programa que leia os dados
 def carregarConjunto():
     file = open("2022_3_EP_4MA_ADO01_DadosMatheusCavalcanti.csv", "r", encoding = "utf-8-sig")
+    # file = open("2022_3_EP_4MA_ADO01_DadosGustavoTozeti.csv", "r", encoding = "utf-8-sig")
     conjunto = list(map(int, file.read().strip().split("\n")))
     print(f"1) Conjunto fornecido: {conjunto}")
     return conjunto
