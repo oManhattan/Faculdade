@@ -1,6 +1,9 @@
 import Exercicio02.Calculadora;
 import Exercicio02.Orcamento;
+import Exercicio03.ArrayUtils;
 import Exercicio03.Organizador;
+import Exercicio04.Departamento;
+import Exercicio04.Diretoria;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -8,7 +11,9 @@ public class App {
         testeExercicio02();
         System.out.println(("\n=-=-= Exercício 03 =-=-=\n"));
         testeExercicio03();
-        System.out.println("\nFim da execução");
+        System.out.println(("=-=-= Exercício 04 =-=-=\n"));
+        testeExercicio04();
+        System.out.println("Fim da execução");
     }
 
     public static void testeExercicio02() {
@@ -24,19 +29,26 @@ public class App {
     }
 
     public static void testeExercicio03() {
-        int[] array = {5, 1, 2, 10, 9, 8, 4};
         for (Organizador o : Organizador.values()) {
-            System.out.printf("Sorter %s -> ", o.name());
+            int[] array = ArrayUtils.createArray(1, 100, 20);
+            System.out.printf("%s\nANTES: %s\n", o.name(), ArrayUtils.toString(array));
             o.getSorter().sort(array);
-            printArray(array);
+            System.out.printf("DEPOIS: %s\n\n", ArrayUtils.toString(array));
         }
     }
 
-    public static void printArray(int[] array) {
-        String str = "";
-        for (int num : array) {
-            str += String.format("%d ", num);
-        }
-        System.out.printf("%s\n", str.strip());
+    public static void testeExercicio04() {
+        Diretoria diretoria = new Diretoria("Manhattan's Corp.");
+        
+        Departamento dep1 = new Departamento("RH", 18000, 8);
+        Departamento dep2 = new Departamento("Financeiro", 50000, 4);
+        Departamento dep3 = new Departamento("Suporte", 5000, 5);
+
+        diretoria.adicionarDepartamento(dep1);
+        diretoria.adicionarDepartamento(dep2);
+        diretoria.adicionarDepartamento(dep3);
+
+        System.out.printf("Custo total: R$ %.2f\n", diretoria.getCusto());
+        diretoria.detalharDepartamentos();
     }
 }
