@@ -1,0 +1,42 @@
+{
+    "nome": "Matheus Cavalcanti de Arruda",
+    "imagem": null,
+    "email": "manhattan@mail.com",
+    "telefone": "(11) 99999-1234",
+    "dataNascimento": "1999-06-11",
+    "linkedin": "https://www.linkedin.com/in/matheus-cavalcantidearruda/",
+    "github": "https://www.github.com/oManhattan",
+    "experienciasProfissionais": [
+        {
+            "empresa": "Apple Developer Academy Senac",
+            "cargo": "Desenvolvedor iOS",
+            "dataInicio": "2022-02-01",
+            "dataTermino": null
+        }
+    ],
+    "formacaoAcademica": [
+        {
+            "curso": "Análise e Desenvolvimento de Sistemas",
+            "instituicao": "Senac"
+        }
+    ],
+    "conhecimentos": [
+        "Java",
+        "Swift",
+        "Sql"
+    ],
+    "idiomas": [
+        {
+            "idioma": "Inglês",
+            "leitura": "Bom",
+            "escrita": "Bom",
+            "conversacao": "Bom"
+        },
+        {
+            "idioma": "Espanhol",
+            "leitura": "Ruim",
+            "escrita": "Ruim",
+            "conversacao": "Ruim"
+        }
+    ]
+}

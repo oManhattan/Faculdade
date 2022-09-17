@@ -1,1 +1,5 @@
-let nomeCompleto = document.querySelector("#nome-completo").innerHTML = "Manhattan"
+
+
+const montarCurriculo = function() {
+
+}
