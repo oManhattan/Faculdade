@@ -13,7 +13,7 @@ article {
 }
 
 p {
-    line-height: 12px;
+    line-height: auto;
 }
 
 #dados-contato {
