@@ -1,0 +1,103 @@
+@charset "utf-8";
+
+body {
+    background-color: lightgray;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+article {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+p {
+    line-height: 12px;
+}
+
+#dados-contato {
+    font-size: 1.25em;
+}
+
+#dados-contato > div {
+    width: 50%;
+}
+
+#dados-contato > div > img {
+    width: 50%;
+}
+
+#dados-contato > h1 {
+    margin-top: 5px;
+    font-size: 2em;
+    text-transform: uppercase;
+}
+
+.secao-dados {
+    background-color: gray;
+    padding: 10px 20px;
+    transition: all 1s ease-in-out;
+}
+
+.secao-dados:hover {
+    background-color: rgb(161, 161, 161);
+    color: rgb(86, 86, 86);
+}
+
+.secao-dados > ul {
+    list-style: none;
+}
+
+#principal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 50px;
+}
+
+#coluna-01 {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 50px;
+}
+
+#coluna-02 {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: stretch;
+    gap: 50px;
+}
+
+#idiomas {
+    margin-top: 50px;
+}
+
+#idiomas > table {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#idiomas > table > tbody > tr:nth-child(2n+1) {
+    background-color: white;
+}
+
+#idiomas > table > tbody > tr:nth-child(2n) {
+    background-color: rgb(175, 175, 175);
+}
+
+#idiomas > table, th, td {
+    text-align: center;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
