@@ -27,16 +27,16 @@
         </section>
         <section id="conhecimentos" class="secao-dados">
           <h2>Conhecimentos</h2>
-          <ul th:each="conhecimento : ${cv.conhecimentos}">
-            <li th:text="${conhecimento}"></li>
+          <ul>
+            <li th:each="conhecimento : ${cv.conhecimentos}" th:text="${conhecimento}"></li>
           </ul>
         </section>
       </div>
       <div id="col-dir">
         <section id="exp-prof" class="secao-dados">
           <h2>Experiências profissionais</h2>
-          <ul th:each="experiencia : ${cv.experienciasProfissionais}">
-            <li>
+          <ul>
+            <li th:each="experiencia : ${cv.experienciasProfissionais}">
               <h3 th:text="${experiencia.empresa}"></h3>
               <p><strong th:text="${experiencia.cargo}"></strong></p>
               <p>Data de início: <span th:text="${#temporals.format(experiencia.dataInicio, 'dd/MM/yyyy')}"></span></p>
@@ -46,8 +46,8 @@
         </section>
         <section id="form-acad" class="secao-dados">
           <h2>Formação acadêmica</h2>
-          <ul th:each="formacao : ${cv.formacaoAcademica}">
-            <li>
+          <ul>
+            <li th:each="formacao : ${cv.formacaoAcademica}">
               <h3 th:text="${formacao.curso}"></h3>
               <p><strong th:text="${formacao.instituicao}"></strong></p>
             </li>
