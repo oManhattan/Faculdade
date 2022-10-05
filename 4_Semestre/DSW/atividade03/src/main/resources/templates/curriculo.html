@@ -14,61 +14,42 @@
     <div id="linha-principal">
       <div id="col-esq">
         <section id="dados-contato">
-          <h1>Fernando Tsuda</h1>
-          <p>Telefone: <span>(11) 99999-1234</span></p>
-          <p>E-mail: <span>fernando.tsuda@sp.senac.br</span></p>
-          <p>Data de nascimento: <span>01/01/1982</span></p>
+          <h1 th:text="${cv.nome}"></h1>
+          <p>Telefone: <span th:text="${cv.telefone}"></span></p>
+          <p>E-mail: <span th:text="${cv.email}"></span></p>
+          <p>Data de nascimento: <span th:text="${#temporals.format(cv.dataNascimento, 'dd/MM/yyyy')}"></span></p>
           <p>LinkedIn:
-            <a href="https://br.linkedin.com/in/ftsuda">
-              https://br.linkedin.com/in/ftsuda
-            </a>
+            <a th:href="${cv.linkedin}" th:text="${cv.linkedin}" target="_blank"></a>
           </p>
           <p>Github:
-            <a href="https://github.com/ftsuda-senac">
-              https://github.com/ftsuda-senac
-            </a>
+            <a th:href="${cv.github}" th:text="${cv.github}" target="_blank"></a>
           </p>
         </section>
         <section id="conhecimentos" class="secao-dados">
           <h2>Conhecimentos</h2>
-          <ul>
-            <li>Tecnologias web</li>
-            <li>Java</li>
-            <li>Spring MVC</li>
-            <li>Gerenciamento de projetos</li>
+          <ul th:each="conhecimento : ${cv.conhecimentos}">
+            <li th:text="${conhecimento}"></li>
           </ul>
         </section>
       </div>
       <div id="col-dir">
         <section id="exp-prof" class="secao-dados">
           <h2>Experiências profissionais</h2>
-          <ul>
+          <ul th:each="experiencia : ${cv.experienciasProfissionais}">
             <li>
-              <h3>BrainyIT</h3>
-              <p><strong>Gerenciamento e desenvolvimento</strong></p>
-              <p>Período: <strong>Desde 2012</strong></p>
-            </li>
-            <li>
-              <h3>Centro Universitário Senac</h3>
-              <p><strong>Professor</strong></p>
-              <p>Período: <strong>Desde 2013</strong></p>
+              <h3 th:text="${experiencia.empresa}"></h3>
+              <p><strong th:text="${experiencia.cargo}"></strong></p>
+              <p>Data de início: <span th:text="${#temporals.format(experiencia.dataInicio, 'dd/MM/yyyy')}"></span></p>
+              <p>Data de término: <span th:text="${#temporals.format(experiencia.dataTermino, 'dd/MM/yyyy')} ?: 'Atual'"></span></p>
             </li>
           </ul>
         </section>
         <section id="form-acad" class="secao-dados">
           <h2>Formação acadêmica</h2>
-          <ul>
+          <ul th:each="formacao : ${cv.formacaoAcademica}">
             <li>
-              <h3>Mestrado em Ciências</h3>
-              <p><strong>Poli-USP/Interlab</strong></p>
-            </li>
-            <li>
-              <h3>MBA em Gestão de TI</h3>
-              <p><strong>FIA - Faculdade Instituto de Administração</strong></p>
-            </li>
-            <li>
-              <h3>Engenharia Elétrica com ênfase em Computação</h3>
-              <p><strong>Poli-USP</strong></p>
+              <h3 th:text="${formacao.curso}"></h3>
+              <p><strong th:text="${formacao.instituicao}"></strong></p>
             </li>
           </ul>
         </section>
@@ -86,23 +67,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>Inglês</th>
-            <td>Bom</td>
-            <td>Médio</td>
-            <td>Ruim</td>
-          </tr>
-          <tr>
-            <th>Espanhol</th>
-            <td>Ruim</td>
-            <td>Ruim</td>
-            <td>Ruim</td>
-          </tr>
-          <tr>
-            <th>Chinês</th>
-            <td>Ruim</td>
-            <td>Ruim</td>
-            <td>Ruim</td>
+          <tr th:each="idioma : ${cv.idiomas}">
+            <th th:text="${#strings.capitalize(idioma.idioma)}"></th>
+            <td th:text="${#strings.capitalize(idioma.leitura)}"></td>
+            <td th:text="${#strings.capitalize(idioma.escrita)}"></td>
+            <td th:text="${#strings.capitalize(idioma.conversacao)}"></td>
           </tr>
         </tbody>
       </table>
