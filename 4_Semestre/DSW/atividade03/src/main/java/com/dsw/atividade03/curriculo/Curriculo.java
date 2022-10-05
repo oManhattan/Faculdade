@@ -1,8 +1,7 @@
-package com.atividade02.atividade02.curriculo;
+package com.dsw.atividade03.curriculo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import java.util.List;
 
 public class Curriculo {
@@ -106,6 +105,4 @@ public class Curriculo {
     public void setIdiomas(List<Idioma> idiomas) {
         this.idiomas = idiomas;
     }
-
-    
 }

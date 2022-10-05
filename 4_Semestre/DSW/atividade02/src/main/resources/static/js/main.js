@@ -10,8 +10,8 @@ let montarCurriculo = function(content) {
     document.querySelector("#github > a").innerHTML = content.github
 
     content.conhecimentos.forEach(montarConhecimentos)
-    content.experiencias.forEach(montarExperiencias)
-    content.formacoes.forEach(montarFormacoes)
+    content.experienciasProfissionais.forEach(montarExperiencias)
+    content.formacaoAcademica.forEach(montarFormacoes)
     content.idiomas.forEach(montarIdiomas)
 }
 
@@ -56,5 +56,4 @@ let fetchCurriculo = async function() {
     montarCurriculo(content)
 }
 
-// document.querySelector("#fetch-data").onclick = fetchCurriculo
 fetchCurriculo()

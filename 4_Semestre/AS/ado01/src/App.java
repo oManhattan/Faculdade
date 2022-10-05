@@ -2,8 +2,6 @@ import Exercicio02.Calculadora;
 import Exercicio02.Orcamento;
 import Exercicio03.ArrayUtils;
 import Exercicio03.Organizador;
-import Exercicio04.Departamento;
-import Exercicio04.Diretoria;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -12,7 +10,7 @@ public class App {
         System.out.println(("\n=-=-= Exercício 03 =-=-=\n"));
         testeExercicio03();
         System.out.println(("=-=-= Exercício 04 =-=-=\n"));
-        testeExercicio04();
+
         System.out.println("Fim da execução");
     }
 
@@ -37,18 +35,4 @@ public class App {
         }
     }
 
-    public static void testeExercicio04() {
-        Diretoria diretoria = new Diretoria("Manhattan's Corp.");
-        
-        Departamento dep1 = new Departamento("RH", 18000, 8);
-        Departamento dep2 = new Departamento("Financeiro", 50000, 4);
-        Departamento dep3 = new Departamento("Suporte", 5000, 5);
-
-        diretoria.adicionarDepartamento(dep1);
-        diretoria.adicionarDepartamento(dep2);
-        diretoria.adicionarDepartamento(dep3);
-
-        System.out.printf("Custo total: R$ %.2f\n", diretoria.getCusto());
-        diretoria.detalharDepartamentos();
-    }
 }

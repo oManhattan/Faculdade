@@ -1,0 +1,13 @@
+Empresa
+
+Diretoria da Matriz
+
+
+Departamentos da Matriz
+    nome: str
+    quantidade: int (quantidade funcionários)
+    custo: double (custo do departamento)
+
+Diretorias Filiais
+    local: str
+

@@ -7,25 +7,24 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 
 import com.atividade02.atividade02.curriculo.Curriculo;
 import com.atividade02.atividade02.curriculo.Experiencia;
 import com.atividade02.atividade02.curriculo.Formacao;
 import com.atividade02.atividade02.curriculo.Idioma;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @SpringBootApplication
-@RestController
+@Controller
 public class Atividade02Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Atividade02Application.class, args);
 	}	
 
-	@RequestMapping(value="/get-curriculo", method=RequestMethod.GET)
+	@GetMapping("get-curriculo")
 	public ResponseEntity<Curriculo> getCurriculo() {
 
 		Curriculo cv = new Curriculo(
@@ -49,8 +48,8 @@ public class Atividade02Application {
 		);
 
 		cv.setConhecimentos(conhecimentos);
-		cv.setExperiencias(experiencias);
-		cv.setFormacoes(formacoes);
+		cv.setExperienciasProfissionais(experiencias);
+		cv.setFormacaoAcademica(formacoes);
 		cv.setIdiomas(idiomas);
 
 		return new ResponseEntity<Curriculo>(cv, HttpStatus.ACCEPTED);
