@@ -1,0 +1,46 @@
+1) Um jogo de tabuleiro precisa garantir que apenas um tabuleiro seja criado.
+
+a) Aplique o design pattern adequado e garanta a unicidade mesmo em um sistema multi-threaded.
+
+b) Escreva na classe de aplicação do pattern, um método que retorne a mensagem “Tabuleiro pronto”.
+
+package exe01;
+
+public class Tabuleiro {
+    
+    private static Tabuleiro tabuleiro;
+
+    private Tabuleiro() {
+        
+    }
+
+    public synchronized static Tabuleiro getTabuleiro() {
+        if (tabuleiro == null) {
+            tabuleiro = new Tabuleiro();
+            System.out.println("Tabuleiro pronto.");
+        }
+        return tabuleiro;
+    }
+}
+
+c) Crie todas as classes necessárias e realize os testes de modo a satisfazer o que foi solicitado.
+
+public class UsaTabuleiro extends Thread {
+
+    @Override
+    public void run() {
+        Tabuleiro t = Tabuleiro.getTabuleiro();
+        System.out.println(t);
+    }
+
+    public static void teste() {
+
+        UsaTabuleiro t1 = new UsaTabuleiro();
+        UsaTabuleiro t2 = new UsaTabuleiro();
+        UsaTabuleiro t3 = new UsaTabuleiro();
+
+        t1.start();
+        t2.start();
+        t3.start();
+    }
+}

@@ -1,0 +1,187 @@
+4) Faça o download da pasta Game. E siga o padrão já estabelecido no projeto.
+
+a) Implemente estados esperando, pulando e abaixando para o player. Escreva também uma classe principal para validar a sua implementação.
+
+public interface EstadoPlayer {
+    public EstadoPlayer esperar();
+    public EstadoPlayer correr();
+    public EstadoPlayer pular();
+    public EstadoPlayer abaixar();
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+public class Correndo implements EstadoPlayer{
+
+    public Correndo() {
+        System.out.println("Correndo");
+    }
+ 
+    @Override
+    public EstadoPlayer esperar() {
+      return new Esperando();  
+    }
+
+    @Override
+    public EstadoPlayer correr() {
+        System.out.println("Já está correndo"); 
+        return this;
+    }
+
+    @Override
+    public EstadoPlayer abaixar() {
+        return new Abaixando();
+    }
+
+    @Override
+    public EstadoPlayer pular() {
+        return new Pulando();
+    }
+    
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+public class Esperando implements EstadoPlayer {
+    
+    public Esperando() {
+        System.out.println("Esperando");
+    }
+
+    @Override
+    public EstadoPlayer correr() {
+        return new Correndo();
+    }
+
+    @Override
+    public EstadoPlayer esperar() {
+        System.out.println("Já estou esperando.");
+        return this;
+    }
+
+    @Override
+    public EstadoPlayer abaixar() {
+        return new Abaixando();
+    }
+
+    @Override
+    public EstadoPlayer pular() {
+        return new Pulando();
+    }
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+public class Pulando implements EstadoPlayer {
+    
+    public Pulando() {
+        System.out.println("Estou pulando");
+    }  
+
+    @Override
+    public EstadoPlayer pular() {
+        System.out.println("Já estou pulando");
+        return this;
+    }
+
+    @Override
+    public EstadoPlayer correr() {
+        return new Correndo();
+    }
+
+    @Override
+    public EstadoPlayer esperar() {
+        return new Esperando();
+    }
+
+    @Override
+    public EstadoPlayer abaixar() {
+        return new Abaixando();
+    }
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+public class Abaixando implements EstadoPlayer {
+    
+    public Abaixando() {
+        System.out.println("Estou abaixando");
+    }
+
+    @Override
+    public EstadoPlayer abaixar() {
+        System.out.println("Já estou abaixado");
+        return this;
+    }
+
+    @Override
+    public EstadoPlayer correr() {
+        return new Correndo();
+    }
+
+    @Override
+    public EstadoPlayer esperar() {
+        return new Esperando();
+    }
+
+    @Override
+    public EstadoPlayer pular() {
+        return new Pulando();
+    }
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+public class ControlaAcoes {
+    private EstadoPlayer estado;
+
+    public ControlaAcoes() {
+        estado = new Esperando();
+    }
+    
+    public void esperar(){
+      estado = estado.esperar();
+    }
+    
+    public void correr(){
+      estado = estado.correr();
+    } 
+
+    public void pular() {
+      estado = estado.pular();
+    }
+
+    public void abaixar() {
+      estado = estado.abaixar();
+    }
+
+    public EstadoPlayer getEstado() {
+      return estado;
+    }
+
+    public void setEstado(EstadoPlayer estado) {
+      this.estado = estado;
+    }
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+public class UsaGame {
+    
+    public static void teste() {
+        ControlaAcoes controle = new ControlaAcoes();
+
+        controle.correr();
+        controle.esperar();
+        for (int i = 0; i < 15; i++) {
+            controle.abaixar();
+            controle.pular();
+        }
+        controle.correr();
+        controle.correr();
+        controle.esperar();
+    }
+
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

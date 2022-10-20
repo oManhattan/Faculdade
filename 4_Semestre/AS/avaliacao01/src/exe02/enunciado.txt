@@ -1,0 +1,99 @@
+2) Um fornecedor de determinado produto vende pacotes, caixas e até containers. Mas, também vende esses produtos no varejo. Independente da quantidade ou tamanho do pacote deve-se obter o preço total da venda.
+
+a) Elabore um projeto que possibilite tratar, de maneira uniforme, objetos individuais e composições desses objetos.
+
+public interface Component {
+    
+    public float getPreco();
+
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Composite implements Component {
+    
+    private String nome;
+    private List<Component> produtos = new ArrayList<>();
+
+    public Composite(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void adicionar(Component p) {
+        this.produtos.add(p);
+    }
+
+    @Override
+    public float getPreco() {
+        float total = 0;
+        for (Component p : produtos) {
+            total += p.getPreco();
+        }
+        return total;
+    }
+
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+public class Leaf implements Component {
+    
+    private String nome;
+    private float preco;
+
+    public Leaf(String nome, float preco) {
+        this.nome = nome;
+        this.preco = preco;
+    }
+
+    @Override
+    public float getPreco() {
+        return preco;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+}
+
+b) Escreva uma classe Main que teste a compra de produtos em caixas e fardos compostos de várias caixas.
+
+public class UsaComposite {
+    
+    public static void teste() {
+
+        Composite container = new Composite("Container");
+
+        Composite caixa1 = new Composite("Caixa 01");
+        Composite caixa2 = new Composite("Caixa 02");
+
+        Component produto01 = new Leaf("Suco de Mimosa", 19.9f);
+        Component produto02 = new Leaf("Chocalho", 5.4f);
+        Component produto03 = new Leaf("Peão", 7.5f);
+        Component produto04 = new Leaf("Tabuleiro", 49.0f);
+        Component produto05 = new Leaf("Xiaomi MiBand 6 Delux Ultra", 2500.0f);
+        Component produto06 = new Leaf("Bacon", 2.5f);
+
+        caixa1.adicionar(produto01);
+        caixa1.adicionar(produto02);
+        caixa1.adicionar(produto03);
+
+        caixa2.adicionar(produto04);
+        caixa2.adicionar(produto05);
+        caixa2.adicionar(produto06);
+
+        container.adicionar(caixa1);
+        container.adicionar(caixa2);
+
+        System.out.printf("Preço total caixa 1: R$%.2f\n", caixa1.getPreco());
+        System.out.printf("Preço total caixa 2: R$%.2f\n", caixa2.getPreco());
+        System.out.printf("Preço total do container: R$%.2f\n", container.getPreco());
+    }
+}

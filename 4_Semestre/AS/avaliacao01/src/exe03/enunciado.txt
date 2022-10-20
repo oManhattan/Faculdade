@@ -1,0 +1,153 @@
+3) Considere um sistema unificado que gerencia os processos financeiros de três bancos: Banco X, Banco Y e Banco Z. Cada banco tem as suas regras e cobranças de TED:
+● Banco X - O cliente pode enviar até dois TEDs sem tarifas, acima disso será cobrada a taxa de R$2,00 por transferência.
+● Banco Y - O cliente pode enviar até três TEDs sem tarifas, acima disso é cobrada a taxa de R$5,00 por transferência.
+● Banco Z - O cliente pode enviar apenas um TED sem tarifas, acima disso é cobrada a taxa de R$2,50 por transferência.
+
+a) Elabore um método que retorne o valor da taxa sobre o serviço financeiro.
+
+public class TED {
+    
+    private float valor;
+
+    public TED(float valor) {
+        this.valor = valor;
+    }
+
+    public float getValor() {
+        return valor;
+    }
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+public class ListaTransferencia {
+    
+    private List<TED> transferencias = new ArrayList<>();
+
+
+    public ListaTransferencia() {
+
+    }
+
+    public void adicionarTransferencia(TED ted) {
+        transferencias.add(ted);
+    }
+
+    public float getTotalTransferido() {
+        float total = 0;
+        for (TED ted : transferencias) {
+            total += ted.getValor();
+        }
+        return total;
+    }
+
+    public List<TED> getTransferencias() {
+        return transferencias;
+    }
+}
+
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+    public interface Taxa {
+    
+    public float calcular(ListaTransferencia lista);
+    
+    }
+
+    =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+    public class BancoX implements Taxa {
+
+    @Override
+    public float calcular(ListaTransferencia lista) {
+        float tarifa = 2;
+        int quantidade = 2;
+        int quantidadeTransferido = lista.getTransferencias().size();
+
+        if (quantidadeTransferido <= quantidade) {
+            return 0;
+        }
+
+        return (quantidadeTransferido - quantidade) * tarifa;
+    }
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+public class BancoY implements Taxa {
+    
+    @Override
+    public float calcular(ListaTransferencia lista) {
+        float tarifa = 5;
+        int quantidade = 3;
+        int quantidadeTransferido = lista.getTransferencias().size();
+        
+        if (quantidadeTransferido <= quantidade) {
+            return 0;
+        }
+
+        return (quantidadeTransferido - quantidade) * tarifa;
+    }
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+public class BancoZ implements Taxa {
+    
+    @Override
+    public float calcular(ListaTransferencia lista) {
+        float tarifa = 2.5f;
+        int quantidade = 1;
+        int quantidadeTransferido = lista.getTransferencias().size();
+
+        if (quantidadeTransferido <= 1) {
+            return 0;
+        }
+
+        return (quantidadeTransferido - quantidade) * tarifa;
+    }
+}
+
+
+b) Crie um projeto Java e aplique um padrão de projeto que encapsule as regras de cobrança de serviços em classes separadas e elimine a cadeia de ifs.
+
+public enum CalculadoraTaxa {
+    
+    BancoX(new BancoX()),
+    BancoY(new BancoY()),
+    BancoZ(new BancoZ());
+
+    private final Taxa taxa;
+
+    private CalculadoraTaxa(Taxa taxa) {
+        this.taxa = taxa;
+    }
+
+    public Taxa getBanco() {
+        return taxa;
+    }
+}
+
+c) Escreva uma classe principal para utilizar o recurso criado por você.
+
+public class UsaBancos {
+    
+    public static void teste() {
+        ListaTransferencia lista = new ListaTransferencia();
+
+        lista.adicionarTransferencia(new TED(150));
+        lista.adicionarTransferencia(new TED(49.5f));
+        lista.adicionarTransferencia(new TED(367.89f));
+        lista.adicionarTransferencia(new TED(6));
+
+        System.out.printf("Total de transferências no dia: %d\n", lista.getTransferencias().size());
+        System.out.printf("Valor total transferido: R$%.2f\n\n", lista.getTotalTransferido());
+
+        for (CalculadoraTaxa c : CalculadoraTaxa.values()) {
+            double resultado = c.getBanco().calcular(lista);
+            System.out.printf("Seria cobrado o valor de R$%.2f do banco %s\n", resultado, c.name());
+        }
+    }
+
+}
