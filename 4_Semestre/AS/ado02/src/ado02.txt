@@ -1,0 +1,616 @@
+Gustavo Tozeti Herculano 1142275851
+Matheus Cavalcanti de Arruda - 1142097286
+
+1) Aplicar o pattern Factory Method no projeto batalha de tanques.
+Batalha de tanques
+
+
+public interface Tanque {
+
+    public String getCanhao();
+
+    public String getCor();
+
+    public String getPosicao();
+
+}
+
+==============================================
+
+public enum ListaTanque {
+    M4_SHERMAN, MERKAVA, CHALLENNGER,TIGER;
+}
+
+==============================================
+
+public interface Creator {
+    public Tanque factoryMethod (ListaTanque tipoTanque);
+}
+
+==============================================
+
+public class M4Sherman implements Tanque {
+
+    private String canhao;
+    private String cor;
+    private String posicao;
+
+    public M4Sherman(String canhao, String cor, String posicao) {
+        this.canhao = canhao;
+        this.cor = cor;
+        this.posicao = posicao;
+    }
+
+    @Override
+    public String getCanhao() {
+
+        return canhao;
+    }
+
+    @Override
+    public String getCor() {
+
+        return cor;
+    }
+
+    @Override
+    public String getPosicao() {
+        return posicao;
+
+    }
+}
+
+==============================================
+
+public class Challenger implements Tanque {
+
+    private String canhao;
+    private String cor;
+    private String posicao;
+
+    public Challenger(String canhao, String cor, String posicao) {
+        this.canhao = canhao;
+        this.cor = cor;
+        this.posicao = posicao;
+    }
+
+    @Override
+    public String getCanhao() {
+
+        return canhao;
+    }
+
+    @Override
+    public String getCor() {
+
+        return cor;
+    }
+
+    @Override
+    public String getPosicao() {
+        return posicao;
+
+    }
+}
+
+==============================================
+
+public class Merkava implements Tanque {
+
+    private String canhao;
+    private String cor;
+    private String posicao;
+
+    public Merkava(String canhao, String cor, String posicao) {
+        this.canhao = canhao;
+        this.cor = cor;
+        this.posicao = posicao;
+    }
+
+    @Override
+    public String getCanhao() {
+
+        return canhao;
+    }
+
+    @Override
+    public String getCor() {
+
+        return cor;
+    }
+
+    @Override
+    public String getPosicao() {
+        return posicao;
+
+    }
+}
+
+==============================================
+
+public class Tiger implements Tanque {
+
+    private String canhao;
+    private String cor;
+    private String posicao;
+
+    public Tiger(String canhao, String cor, String posicao) {
+        this.canhao = canhao;
+        this.cor = cor;
+        this.posicao = posicao;
+    }
+
+    @Override
+    public String getCanhao() {
+
+        return canhao;
+    }
+
+    @Override
+    public String getCor() {
+
+        return cor;
+    }
+
+    @Override
+    public String getPosicao() {
+        return posicao;
+
+    }
+}
+
+==============================================
+
+public class FabricaTanque implements Creator {
+
+    @Override
+    public Tanque factoryMethod(ListaTanque tipoTanque) {
+        Tanque tanque = null;
+
+        if (tipoTanque.equals(ListaTanque.M4_SHERMAN)) {
+            tanque = new M4Sherman(".70", "Vermelho","40.2317315,-78.2804136");
+
+        } else if (tipoTanque.equals(ListaTanque.TIGER)) {
+            tanque = new Tiger(".50", "Camuflado","51.70204270390542, 11.589664419630582");
+
+        }
+        else if (tipoTanque.equals(ListaTanque.CHALLENNGER)) {
+            tanque = new Challenger(".30", "Nevado","58.63442129529803, -3.1941059626472117");
+
+        }
+        else if (tipoTanque.equals(ListaTanque.MERKAVA)) {
+            tanque = new Merkava(".120", "Verde","31.498099755729783, 34.52576324697001");
+
+        }
+
+        return tanque;
+    }
+
+}
+
+==============================================
+
+public class UsaFactory {
+    public static void main(String[] args) throws Exception {
+        try {
+            int n = 2;
+            
+            FabricaTanque tanque = new FabricaTanque();
+
+            Tanque t1 = tanque.factoryMethod(ListaTanque.values()[n]);
+            
+            System.out.println("Modelo: "+ t1.getClass().getName());
+            System.out.println("Canhão: "+ t1.getCanhao());
+            System.out.println("Cor: "+ t1.getCor());
+            System.out.println("Posição: "+ t1.getPosicao());
+
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException e){
+            System.out.println("Tanque inválido!");
+        }
+    }
+}
+
+
+==============================================
+
+2) Elabore um projeto utilizando o pattern state para modelar os estados possíveis de uma compra online. 
+Considere os estados após o cliente realizar o pagamento, que são eles:
+• pedido em separação
+• pedido enviado para transportadora
+• pedido em rota de entrega
+• pedido entregue.
+
+public class Pedido {
+    
+    private int numeroPedido;
+    private PedidoState state;
+
+    public Pedido() {
+        
+    }
+
+    public Pedido(int numeroPedido) {
+        this.numeroPedido = numeroPedido;
+        this.state = new SeparacaoState();
+    }
+
+    public Pedido(int numeroPedido, PedidoState state) {
+        this.numeroPedido = numeroPedido;
+        this.state = state;
+    }
+
+    public void proxState() {
+        this.state.proxState(this);
+    }
+
+    public void anteriorState() {
+        this.state.anteriorState(this);
+    }
+
+    public void atualState() {
+        this.state.atualState();
+    }
+
+    public int getNumeroPedido() {
+        return numeroPedido;
+    }
+
+    public void setNumeroPedido(int numeroPedido) {
+        this.numeroPedido = numeroPedido;
+    }
+
+    public PedidoState getState() {
+        return state;
+    }
+
+    public void setState(PedidoState state) {
+        this.state = state;
+    }
+}
+
+=================================
+
+public interface PedidoState {
+    
+    public void proxState(Pedido pedido);
+    public void anteriorState(Pedido pedido);
+    public void atualState();
+
+}
+
+=================================
+
+public class SeparacaoState implements PedidoState {
+
+    @Override
+    public void proxState(Pedido pedido) {
+        pedido.setState(new EnviadoState());
+    }
+
+    @Override
+    public void anteriorState(Pedido pedido) {
+        System.out.println("Separação é o State raiz.");
+    }
+
+    @Override
+    public void atualState() {
+        System.out.println("Pedido está sendo separado.");
+    }
+
+}
+
+=================================
+
+ublic class EnviadoState  implements PedidoState {
+
+    @Override
+    public void proxState(Pedido pedido) {
+        pedido.setState(new RotaState());
+    }
+
+    @Override
+    public void anteriorState(Pedido pedido) {
+        pedido.setState(new SeparacaoState());
+    }
+
+    @Override
+    public void atualState() {
+        System.out.println("Pedido foi enviado.");
+    }
+    
+}
+
+=================================
+
+public class RotaState implements PedidoState {
+
+    @Override
+    public void proxState(Pedido pedido) {
+        pedido.setState(new EntregueState());
+    }
+
+    @Override
+    public void anteriorState(Pedido pedido) {
+        pedido.setState(new EnviadoState());
+    }
+
+    @Override
+    public void atualState() {
+        System.out.println("Pedido em rota de entrega.");
+    }
+    
+}
+
+=================================
+
+public class EntregueState implements PedidoState {
+
+    @Override
+    public void proxState(Pedido pedido) {
+        System.out.println("Pedido já foi entregue.");
+    }
+
+    @Override
+    public void anteriorState(Pedido pedido) {
+        pedido.setState(new RotaState());
+    }
+
+    @Override
+    public void atualState() {
+        System.out.println("Pedido entregue.");
+    }
+    
+}
+
+=================================
+
+public static void main(String[] args) {
+
+    Pedido pedido = new Pedido(1, new SeparacaoState());
+    for (int i = 0; i < 4; i++) {
+        pedido.atualState();
+        pedido.proxState();
+    }    
+}
+
+=================================
+
+3) Modifique o exemplo passado em aula para:
+a) Possibilitar a remoção de objetos observadores, simulando a
+destruição de uma nave inimiga.
+b) Implemente o padrão singleton para garantir que instancie apenas um
+jogador.
+c) Implemente uma lógica para fazer com que a nave do jogador tenha
+movimento aleatório. Execute e veja o comportamento das naves
+inimigas.
+
+public interface Observer {
+    public void update(Acoes acoes);
+}
+
+===================================
+
+
+public interface Subject {
+
+    public void addObserver(Observer observer);
+    
+    public void addAcoes(Acoes acoes);
+    
+    public void notificar();
+    
+    public void deleteObserver(Observer observer);
+
+}
+
+
+
+===================================
+
+public enum Acoes {
+    AVANCAR, RECUAR, ESQUERDA, DIREITA;
+}
+
+===================================
+
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class NaveJogador implements Subject {
+
+    private List<Observer> observadores = new LinkedList<>();
+    private List<Acoes> listaAcoes = new LinkedList<>();
+    private int index = -1;
+
+    private final static NaveJogador nave = new NaveJogador();
+
+    private NaveJogador() {
+    };
+
+    public static NaveJogador getInstance() {
+      
+        return nave;
+        }
+        
+
+    @Override
+    public void addObserver(Observer observer) {
+        observadores.add(observer);
+
+    }
+
+    @Override
+    public void addAcoes(Acoes acoes) {
+        listaAcoes.add(acoes);
+        index++;
+        notificar();
+
+    }
+
+    @Override
+    public void notificar() {
+        for (Observer observer : observadores) {
+            observer.update(listaAcoes.get(index));
+        }
+    }
+
+    @Override
+    public void deleteObserver(Observer observer) {
+        observadores.remove(observer);
+        System.out.println(observer.toString() + " Destruída!!");
+    }
+
+}
+
+===================================
+
+public class NaveInimiga implements Observer {
+
+    private String nome;
+
+    public NaveInimiga(String nome, Subject subject) {
+        this.nome = nome;
+        subject.addObserver(this);
+    }
+
+    @Override
+    public void update(Acoes acoes) {
+        System.out.println(nome + " " + acoes);
+
+    }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
+
+    
+
+}
+
+
+===================================
+
+
+import java.util.Random;
+
+public class ExemploObserver {
+    public static void main(String[] args) {
+        Subject jogador = NaveJogador.getInstance();
+        Observer naveInimiga2 = new NaveInimiga("Nave2", jogador);
+        Observer naveInimiga1 = new NaveInimiga("Nave1", jogador);
+
+        Random r = new Random();
+
+        for (int i = 0; i < 5; i++) {
+            
+            jogador.addAcoes(Acoes.values()[r.nextInt(4)]);
+
+        }
+        jogador.deleteObserver(naveInimiga1);
+        jogador.deleteObserver(naveInimiga2);
+    }
+}
+
+===================================
+
+4) Aplique o padrão Observer para uma agência que informa vagas de empregos para assinantes do serviço. Escreva uma classe principal para validar o seu exercício, usando três ou mais assinantes do serviços.
+
+public interface Observer {
+    public void update(Object o);
+}
+
+========================================
+
+public interface Subject {
+    public void addObserver(Observer observer);
+    public void removeObserver(Observer observer);
+
+    public void addVaga(String vaga);
+    public void removeVaga(String vaga);
+
+    public void updateAll();
+}
+
+========================================
+
+public class Agencia implements Subject {
+
+    List<Observer> assinantes = new ArrayList<>();
+    List<String> vagas = new ArrayList<>();
+
+    @Override
+    public void addObserver(Observer observer) {
+        this.assinantes.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        this.assinantes.remove(observer);
+    }
+
+    @Override
+    public void addVaga(String vaga) {
+        this.vagas.add(vaga);
+        updateAll();
+    }
+
+    @Override
+    public void removeVaga(String vaga) {
+        this.vagas.remove(vaga);
+    }
+
+    @Override
+    public void updateAll() {
+        for (Observer o : this.assinantes) {
+            o.update(vagas.get(vagas.size() - 1));
+        }
+    }
+}
+
+========================================
+
+public class Assinante implements Observer{
+    
+    private String nome;
+
+    public Assinante() {
+
+    }
+
+    public Assinante(String nome) {
+        this.nome = nome;
+    }
+
+    public Assinante(String nome, Subject subject) {
+        this.nome = nome;
+        subject.addObserver(this);
+    }
+
+    @Override
+    public void update(Object o) {
+        System.out.printf("%s, temos uma nova nava: %s\n", getNome(), o.toString());
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+}
+
+========================================
+
+    public static void main(String[] args) {
+
+        Subject agencia = new Agencia();
+        Observer assinante1 = new Assinante("Gerson", agencia);
+        agencia.addVaga("Desenvolvedor Full Stack");
+        agencia.addVaga("Desenvolvedor Python Sênior");
+        Observer assinante2 = new Assinante("Tozeti", agencia);
+        agencia.addVaga("Desenvolvedor Java Pleno");
+        
+    }

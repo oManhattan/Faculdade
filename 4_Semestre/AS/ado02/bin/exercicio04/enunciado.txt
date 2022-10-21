@@ -1,0 +1,99 @@
+4) Aplique o padrão Observer para uma agência que informa vagas de empregos para assinantes do serviço. Escreva uma classe principal para validar o seu exercício, usando três ou mais assinantes do serviços.
+
+public interface Observer {
+    public void update(Object o);
+}
+
+========================================
+
+public interface Subject {
+    public void addObserver(Observer observer);
+    public void removeObserver(Observer observer);
+
+    public void addVaga(String vaga);
+    public void removeVaga(String vaga);
+
+    public void updateAll();
+}
+
+========================================
+
+public class Agencia implements Subject {
+
+    List<Observer> assinantes = new ArrayList<>();
+    List<String> vagas = new ArrayList<>();
+
+    @Override
+    public void addObserver(Observer observer) {
+        this.assinantes.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        this.assinantes.remove(observer);
+    }
+
+    @Override
+    public void addVaga(String vaga) {
+        this.vagas.add(vaga);
+        updateAll();
+    }
+
+    @Override
+    public void removeVaga(String vaga) {
+        this.vagas.remove(vaga);
+    }
+
+    @Override
+    public void updateAll() {
+        for (Observer o : this.assinantes) {
+            o.update(vagas.get(vagas.size() - 1));
+        }
+    }
+}
+
+========================================
+
+public class Assinante implements Observer{
+    
+    private String nome;
+
+    public Assinante() {
+
+    }
+
+    public Assinante(String nome) {
+        this.nome = nome;
+    }
+
+    public Assinante(String nome, Subject subject) {
+        this.nome = nome;
+        subject.addObserver(this);
+    }
+
+    @Override
+    public void update(Object o) {
+        System.out.printf("%s, temos uma nova nava: %s\n", getNome(), o.toString());
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+}
+
+========================================
+
+    public static void main(String[] args) {
+
+        Subject agencia = new Agencia();
+        Observer assinante1 = new Assinante("Gerson", agencia);
+        agencia.addVaga("Desenvolvedor Full Stack");
+        agencia.addVaga("Desenvolvedor Python Sênior");
+        Observer assinante2 = new Assinante("Tozeti", agencia);
+        agencia.addVaga("Desenvolvedor Java Pleno");
+        
+    }

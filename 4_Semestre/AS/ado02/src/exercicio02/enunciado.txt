@@ -1,0 +1,161 @@
+2) Elabore um projeto utilizando o pattern state para modelar os estados possíveis de uma compra online. 
+Considere os estados após o cliente realizar o pagamento, que são eles:
+• pedido em separação
+• pedido enviado para transportadora
+• pedido em rota de entrega
+• pedido entregue.
+
+public class Pedido {
+    
+    private int numeroPedido;
+    private PedidoState state;
+
+    public Pedido() {
+        
+    }
+
+    public Pedido(int numeroPedido) {
+        this.numeroPedido = numeroPedido;
+        this.state = new SeparacaoState();
+    }
+
+    public Pedido(int numeroPedido, PedidoState state) {
+        this.numeroPedido = numeroPedido;
+        this.state = state;
+    }
+
+    public void proxState() {
+        this.state.proxState(this);
+    }
+
+    public void anteriorState() {
+        this.state.anteriorState(this);
+    }
+
+    public void atualState() {
+        this.state.atualState();
+    }
+
+    public int getNumeroPedido() {
+        return numeroPedido;
+    }
+
+    public void setNumeroPedido(int numeroPedido) {
+        this.numeroPedido = numeroPedido;
+    }
+
+    public PedidoState getState() {
+        return state;
+    }
+
+    public void setState(PedidoState state) {
+        this.state = state;
+    }
+}
+
+=================================
+
+public interface PedidoState {
+    
+    public void proxState(Pedido pedido);
+    public void anteriorState(Pedido pedido);
+    public void atualState();
+
+}
+
+=================================
+
+public class SeparacaoState implements PedidoState {
+
+    @Override
+    public void proxState(Pedido pedido) {
+        pedido.setState(new EnviadoState());
+    }
+
+    @Override
+    public void anteriorState(Pedido pedido) {
+        System.out.println("Separação é o State raiz.");
+    }
+
+    @Override
+    public void atualState() {
+        System.out.println("Pedido está sendo separado.");
+    }
+
+}
+
+=================================
+
+ublic class EnviadoState  implements PedidoState {
+
+    @Override
+    public void proxState(Pedido pedido) {
+        pedido.setState(new RotaState());
+    }
+
+    @Override
+    public void anteriorState(Pedido pedido) {
+        pedido.setState(new SeparacaoState());
+    }
+
+    @Override
+    public void atualState() {
+        System.out.println("Pedido foi enviado.");
+    }
+    
+}
+
+=================================
+
+public class RotaState implements PedidoState {
+
+    @Override
+    public void proxState(Pedido pedido) {
+        pedido.setState(new EntregueState());
+    }
+
+    @Override
+    public void anteriorState(Pedido pedido) {
+        pedido.setState(new EnviadoState());
+    }
+
+    @Override
+    public void atualState() {
+        System.out.println("Pedido em rota de entrega.");
+    }
+    
+}
+
+=================================
+
+public class EntregueState implements PedidoState {
+
+    @Override
+    public void proxState(Pedido pedido) {
+        System.out.println("Pedido já foi entregue.");
+    }
+
+    @Override
+    public void anteriorState(Pedido pedido) {
+        pedido.setState(new RotaState());
+    }
+
+    @Override
+    public void atualState() {
+        System.out.println("Pedido entregue.");
+    }
+    
+}
+
+=================================
+
+public static void main(String[] args) {
+
+    Pedido pedido = new Pedido(1, new SeparacaoState());
+    for (int i = 0; i < 4; i++) {
+        pedido.atualState();
+        pedido.proxState();
+    }    
+}
+
+=================================
