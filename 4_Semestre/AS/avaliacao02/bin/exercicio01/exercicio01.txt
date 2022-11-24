@@ -1,0 +1,15 @@
+Valor: 2 pontos
+1 - Elabore um projeto que contenha a classe Livro: titulo (String), autor (String),
+preco (double), numeroPaginas (int). Defina todos os recursos básicos para essa
+classe.
+Na classe principal, faça:
+a) Uma lista de seis livros e classifique-a por autor, usando o método sort() da
+classe Collections;
+b) Exiba a lista usando forEach da lista (interface Iterator);
+c) Realize a busca por autor, usando binarySearch() da classe Collections. E
+monte uma lógica para exibir a posição da lista ou informar que não achou
+o livro.
+d) Apresente um print da execução com a lista de livros ordenada e a
+informação se achou ou não o livro pesquisado.
+Observação: As implementações das interfaces funcionais Comparartor e
+Consumer devem estar escritas em expressões lambdas.

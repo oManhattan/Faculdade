@@ -1,0 +1,54 @@
+Valor: 4 pontos
+2 - Deseja-se ordenar um array previamente populado. Para tanto, pede-se:
+a) Elabore um interface funcional que tenha um método abstrato: public void
+ordenar(tipo_de_dado[] v);
+E outro método que contenha a lógica implementada para exibição dos
+dados do array.
+Tome todos os cuidados para garantir que seja uma interface funcional!
+
+@FunctionalInterface
+public interface Ordenador<T> {
+    
+    public void ordenar(T[] array);
+
+    public default void mostrar(T[] array) {
+        String out = "";
+        for (T t : array) {
+            out += t + " ";
+        }
+        System.out.println(out);
+    }
+}
+
+b) Na classe principal, implemente o método de ordenação que desejar,
+exceto bubble sort. Utilize a expressão lambda para essa implementação.
+
+c) Na classe principal, apresente os dados ordenados utilizando o método
+escrito na interface funcional.
+
+public class App {
+    public static void main(String[] args) throws Exception {
+        Integer[] numbers = {5, 8, 6, 0, 9, 10, 7};
+
+        Ordenador<Integer> ordenador = array -> {
+            for (int i = 1; i < array.length; i++) {
+                int temp = array[i];
+                int j = i;
+                while ((j > 0) && (array[j - 1] > temp)) {
+                    array[j] = array[j - 1];
+                    j--;
+                }
+                array[j] = temp;
+            }
+        };
+
+        System.out.print("Antes -> ");
+        ordenador.mostrar(numbers);
+        ordenador.ordenar(numbers);
+        System.out.print("Depois -> ");
+        ordenador.mostrar(numbers);
+    }
+}
+
+d) Apresente um print da execução, mostrando os dados do array ordenados.
+

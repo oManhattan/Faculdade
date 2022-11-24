@@ -1,12 +1,17 @@
 package ArvoreBinaria;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author natanrodrigues
  */
+
 public class No {
-    private Object objeto; //objeto generico
-    private No esquerda, direita; //apontará coisas do tipo No 
+    private Object objeto; //objeto generico // valor do nó
+    private No esquerda, direita; //apontará coisas do tipo No // uma lista
+    // chave do nó
 
     public No(Object objeto, No esquerda, No direita) {
         this.objeto = objeto;

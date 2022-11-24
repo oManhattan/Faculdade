@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+</head>
+<body>
+    <h1>Trabalho Individual de Desenvolvimento de Sistemas Web</h1>
+    <button id="listMusic" type="submit">Abrir lista de músicas</button>
+    <li id="lista_musica">
+
+    </li>
+</body>
+<script>
+
+    const carregarLista = async () => {
+        const request = await fetch('http://localhost:8080/api/')
+        
+        if (request.status === 200) {
+            const lista = request.json()
+            const listaHTML = document.querySelector('#lista_musica')
+            lista.array.forEach(musica => {
+                listaHTML.insertAdjacentElement('afterbegin', `<ul>${musica.titulo}</ul>`)
+            })
+        } else {
+            alert("Não foi possível carregar a lista de músicas.")
+        }
+    }
+
+    const redirect = async () => {
+        window.location.replace('/nova-musica')
+    }
+
+    let button = document.querySelector("#listMusic")
+    button.addEventListener('click', redirect)
+</script>
+</html>

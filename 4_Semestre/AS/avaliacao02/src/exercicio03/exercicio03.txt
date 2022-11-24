@@ -1,0 +1,211 @@
+Valor: 4 pontos
+3 - Um restaurante criou um serviço de receitas populares e envia, frequentemente
+aos seus assinantes, uma lista de ingredientes e a estimativa de preços de cada
+ingrediente. Pede-se:
+a) Utilize o padrão observer para implementar esse cenário.
+
+public interface Observer {
+    
+    public void update(Object o);
+
+}
+
+public interface Subject {
+    public void addObserver(Observer observer);
+    public void removeObserver(Observer observer);
+
+    public void addReceita(Component component);
+    public void removeReceita(Component component);
+
+    public void updateAll();
+}
+
+public class Assinante implements Observer{
+    
+    private String nome;
+
+    public Assinante() {
+
+    }
+
+    public Assinante(String nome) {
+        this.nome = nome;
+    }
+
+    public Assinante(String nome, Subject subject) {
+        this.nome = nome;
+        subject.addObserver(this);
+    }
+
+    @Override
+    public void update(Object o) {
+        System.out.printf("%s, temos uma nova receita: %s\n", getNome(), o.toString());
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+}
+
+public class Restaurante implements Subject {
+
+    List<Observer> assinantes = new ArrayList<>();
+    List<Component> receitas = new ArrayList<>();
+
+    @Override
+    public void addObserver(Observer observer) {
+        this.assinantes.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        this.assinantes.remove(observer);
+    }
+
+    @Override
+    public void addReceita(Component component) {
+        this.receitas.add(component);
+        updateAll();
+    }
+
+    @Override
+    public void removeReceita(Component component) {
+        this.receitas.remove(component);
+    }
+
+    @Override
+    public void updateAll() {
+        for (Observer o : this.assinantes) {
+            o.update(receitas.get(receitas.size() - 1));
+        }
+    }
+}
+
+b) Utilize o padrão composite para compor as receitas.
+
+public interface Component {
+    
+    public float getPreco();
+
+}
+
+public class Ingrediente implements Component {
+    
+    private String nome;
+    private float preco;
+
+    public Ingrediente() {
+
+    }
+
+    public Ingrediente(String nome, float preco) {
+        this.nome = nome;
+        this.preco = preco;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s: R$%.2f", getNome(), getPreco());
+    }
+
+    public String getNome() {
+        return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    @Override
+    public float getPreco() {
+        return preco;
+    }
+    public void setPreco(float preco) {
+        this.preco = preco;
+    }
+}
+
+public class Receita implements Component {
+    
+    private String nome;
+    private List<Component> ingredientes = new ArrayList<>();
+
+    public Receita() {
+
+    }
+
+    public Receita(String nome, List<Component> ingredientes) {
+        this.nome = nome;
+        this.ingredientes = ingredientes;
+    }
+
+    public void adicionarIngrediente(Component c) {
+        this.ingredientes.add(c);
+    }
+
+    public void removerIngrediente(Component c) {
+        this.ingredientes.remove(c);
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    @Override
+    public float getPreco() {
+        float total = 0;
+        for (Component component : ingredientes) {
+            total += component.getPreco();
+        }
+        return total;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s, total: R$%.2f\nIngredientes: %s", getNome(), getPreco(), this.ingredientes.toString());
+    }
+}
+
+c) Escreva uma classe principal que simule a assinatura do serviço, por duas
+pessoas e as notifique das receitas novas (Duas receitas, no mínimo).
+
+public class App {
+    public static void main(String[] args) throws Exception {
+
+        Restaurante restaurante = new Restaurante();
+
+        restaurante.addObserver(new Assinante("Tozeti"));
+
+        restaurante.addReceita(new Receita("Ovo frito", List.of(
+            new Ingrediente("ovo", 0.5f), 
+            new Ingrediente("óleo", 10.0f))));
+
+        restaurante.addReceita(new Receita("Bolo de chocolate fofinho", List.of(
+            new Ingrediente("chocolate", 5.0f),
+            new Ingrediente("farinha  de trigro", 7.0f),
+            new Ingrediente("ovo", 1.5f),
+            new Ingrediente("fermento", 5.0f)
+        )));
+
+        restaurante.addObserver(new Assinante("Manhattan"));
+
+        restaurante.addReceita(new Receita("Bolinho de chuva", List.of(
+            new Ingrediente("farinha de trigro", 7.0f),
+            new Ingrediente("óleo", 10.0f),
+            new Ingrediente("fermento", 5.0f),
+            new Ingrediente("canela", 9.0f),
+            new Ingrediente("açúcar", 4.5f),
+            new Ingrediente("essência de baunilha", 15.0f)
+        )));
+    }
+}
+
+d) Apresente um print da execução, mostrando os assinantes e as receitas
+recebidas por eles.

@@ -1,9 +1,13 @@
 package ArvoreBinaria;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author natanrodrigues
  */
+
 public class Arvore {
     private No raiz = null;
     private Lista lista = new Lista();
