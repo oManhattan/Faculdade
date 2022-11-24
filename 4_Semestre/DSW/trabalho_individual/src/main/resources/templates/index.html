@@ -1,39 +1,86 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home page</title>
+    <title>Todas as músicas</title>
+    <style>
+        th, td {
+            text-align: center;
+        }
+    </style>
 </head>
-<body>
-    <h1>Trabalho Individual de Desenvolvimento de Sistemas Web</h1>
-    <button id="listMusic" type="submit">Abrir lista de músicas</button>
-    <li id="lista_musica">
 
-    </li>
+<body>
+    <h1>Todas as músicas</h1>
+    <button id="btn-new-music" type="submit">Nova música</button>
+
+    <table id="music-table">
+        <thead>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Artista</th>
+            <th>Ano de lançamento</th>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 </body>
 <script>
 
-    const carregarLista = async () => {
-        const request = await fetch('http://localhost:8080/api/')
-        
-        if (request.status === 200) {
-            const lista = request.json()
-            const listaHTML = document.querySelector('#lista_musica')
-            lista.array.forEach(musica => {
-                listaHTML.insertAdjacentElement('afterbegin', `<ul>${musica.titulo}</ul>`)
-            })
-        } else {
-            alert("Não foi possível carregar a lista de músicas.")
-        }
+    const loadMusicList = () => {
+        const request = new XMLHttpRequest()
+        request.open('GET', 'http://localhost:8080/api/todas-musicas', true)
+        request.setRequestHeader('Content-Type', 'application/json')
+        request.setRequestHeader('Accept', 'application/json')
+        request.addEventListener('load', () => {
+            if (request.status !== 200) {
+                return
+            }
+            const content = JSON.parse(request.response)
+            console.log(content)
+            if (content.lenght === 0) {
+                console.log('esta vazio')
+                return
+            }
+
+            document.querySelector('#music-table > tbody').innerHTML = ''
+            for (const music of content) {
+                document.querySelector('#music-table > tbody').insertAdjacentHTML('beforeend',
+                    `<tr>
+                        <td>${music.id}</td>
+                        <td>${music.titulo}</td>
+                        <td>${music.artista}</td>
+                        <td>${music.anoLancamento}</td>
+                        <td><button class="btn-delete-music" name="btn-delete-${music.id}" onClick="deleteMusic(this)">apagar</button></td>
+                    </tr>`
+                )
+            }
+        })
+        request.send()
     }
 
-    const redirect = async () => {
-        window.location.replace('/nova-musica')
+    const deleteMusic = (element) => {
+        const elementName = element.getAttribute('name')
+        const musicID = parseInt(elementName.split('-')[2])
+        const request = new XMLHttpRequest()
+        request.open('DELETE', `http://localhost:8080/api/delete-music?id=${musicID}`, true)
+        request.setRequestHeader('Content-Type', 'application/json')
+        request.setRequestHeader('Accept', '*/*')
+        request.addEventListener('load', (event) => {
+            if (request.status !== 200) {
+                console.log(request.responseText)
+                return
+            }
+            loadMusicList()
+        })
+        request.send()
     }
 
-    let button = document.querySelector("#listMusic")
-    button.addEventListener('click', redirect)
+    window.addEventListener('load', loadMusicList)
+    document.querySelector('#btn-new-music').addEventListener('click', () => { window.location.href = '/new-music' })
 </script>
+
 </html>

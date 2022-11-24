@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova música</title>
+</head>
+
+<body>
+    <article>
+        <h1>Nova música</h1>
+        <form id="form-new-music">
+            <div>
+                <input id="field-title" name="titulo" type="text" title="Título"
+                    placeholder="Preencha o título da música">
+                <input id="field-artist" name="artista" type="text" title="Artista"
+                    placeholder="Preencha o nome do artista">
+                <input id="field-year" name="ano_lancamento" type="number" title="Ano de lançamento"
+                    placeholder="Preencha o ano de lançamento da música">
+            </div>
+            <div>
+                <button id="btn-send">Enviar</button>
+            </div>
+        </form>
+        <button id="btn-cancel">Cancelar</button>
+    </article>
+</body>
+<script>
+
+    const buildMusic = () => {
+        const title = document.querySelector('#field-title').value
+        const artist = document.querySelector('#field-artist').value
+        const year = parseInt(document.querySelector('#field-year').value)
+        return {
+            titulo: title,
+            artista: artist,
+            ano_lancamento: year
+        }
+    }
+
+    const saveMusic = (event) => {
+        event.preventDefault()
+        const request = new XMLHttpRequest()
+
+        request.open('POST', 'http://localhost:8080/api/nova-musica', true)
+        request.setRequestHeader('Content-Type', 'application/json')
+        request.setRequestHeader('Accept', '*/*')
+
+        request.onload = (event) => {
+            if (request.status !== 200) {
+                return
+            }
+
+            window.location.href = 'http://localhost:8080'
+        }
+
+        request.send(JSON.stringify(buildMusic()))
+    }
+
+
+    document.querySelector('#btn-cancel').addEventListener('click', () => { window.location.href = 'http://localhost:8080' })
+    document.querySelector('#form-new-music').addEventListener('submit', saveMusic)
+</script>
+
+</html>

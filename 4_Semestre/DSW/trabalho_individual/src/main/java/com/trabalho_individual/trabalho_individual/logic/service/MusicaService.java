@@ -28,4 +28,8 @@ public class MusicaService {
     public List<MusicaEntity> carregarTodasMusicas() {
         return musicaRepository.todasMusicas();
     }
+
+    public void deleteMusic(Long id) throws Exception {
+        musicaRepository.deleteById(id);
+    }
 }

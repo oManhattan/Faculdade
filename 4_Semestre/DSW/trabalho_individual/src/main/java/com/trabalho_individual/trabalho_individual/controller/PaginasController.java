@@ -14,9 +14,9 @@ public class PaginasController {
         return model;
     }
 
-    @GetMapping("/nova-musica")
+    @GetMapping("/new-music")
     public ModelAndView novaMusica() {
-        ModelAndView model = new ModelAndView("nova_musica");
+        ModelAndView model = new ModelAndView("new_music");
         return model;
     }
     
