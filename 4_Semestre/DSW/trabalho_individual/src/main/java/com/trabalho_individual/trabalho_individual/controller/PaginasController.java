@@ -8,14 +8,18 @@ import org.springframework.web.servlet.ModelAndView;
 public class PaginasController {
     
     @GetMapping("/")
-    public ModelAndView home() {
-        ModelAndView model = new ModelAndView("index");
+    public ModelAndView homePage() {
+        return new ModelAndView("index");
+    }
 
+    @GetMapping("/music/list")
+    public ModelAndView musicListPage() {
+        ModelAndView model = new ModelAndView("music_list");
         return model;
     }
 
-    @GetMapping("/new-music")
-    public ModelAndView novaMusica() {
+    @GetMapping("/music/new")
+    public ModelAndView newMusicPage() {
         ModelAndView model = new ModelAndView("new_music");
         return model;
     }

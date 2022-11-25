@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/music")
 public class MusicaController {
 
     @Autowired
     private MusicaService musicaService;
 
-    @PostMapping("/nova-musica")
+    @PostMapping("/new")
     public ResponseEntity<?> salvarNovaMusica(@RequestBody MusicaRequest request) {
         try {
             musicaService.salvarNovaMusica(request);
@@ -37,7 +37,7 @@ public class MusicaController {
         }
     }
 
-    @GetMapping("/todas-musicas")
+    @GetMapping("/all")
     public ResponseEntity<?> todasAsMusicas() {
         try {
             List<MusicaEntity> response = musicaService.carregarTodasMusicas();
@@ -47,7 +47,7 @@ public class MusicaController {
         }
     }
 
-    @DeleteMapping("/delete-music")
+    @DeleteMapping("/delete")
     public ResponseEntity<?> deleteMusic(@RequestParam("id") Long id) {
         try {
             musicaService.deleteMusic(id);
