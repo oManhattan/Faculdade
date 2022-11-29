@@ -5,46 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
     <title>Todas as músicas</title>
-    <style>
-        #music-table {
-            font-family: Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        #music-table td,
-        #music-table th {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        #music-table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        #music-table tr:hover {
-            background-color: #ddd;
-        }
-
-        #music-table th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #04AA6D;
-            color: white;
-        }
-
-        .btn-cell {
-            text-align: center;
-        }
-    </style>
 </head>
 
 <body>
-    <button onclick="window.location.href = 'http://localhost:8080'">Voltar para a home</button>
-    <h1>Todas as músicas</h1>
-    <button id="btn-new-music" type="submit">Nova música</button>
+    <div id="list-title">
+        <button class="btn-default" onclick="window.location.href = 'http://localhost:8080'">🡄 Voltar para a home</button>
+        <h1>Todas as músicas</h1>
+    </div>
+    <button class="btn-add" id="btn-new-music" type="submit">+ Nova música</button>
 
     <table id="music-table">
         <thead>
@@ -59,6 +29,13 @@
     </table>
 </body>
 <script>
+
+    const newMusicMessage = () => {
+        if (localStorage.getItem('new-music') === 'true') {
+            document.querySelector('#list-title').insertAdjacentHTML('afterend', '<div id="new-music-message"><h3>Música adicionada com sucesso</h3></div>')
+            localStorage.setItem('new-music', 'false')
+        }
+    }
 
     const loadMusicList = () => {
         const request = new XMLHttpRequest()
@@ -78,6 +55,8 @@
                 return
             }
 
+            newMusicMessage()
+
             for (const music of content) {
                 document.querySelector('#music-table > tbody').insertAdjacentHTML('beforeend',
                     `<tr>
@@ -85,7 +64,7 @@
                         <td>${music.titulo}</td>
                         <td>${music.artista}</td>
                         <td>${music.anoLancamento}</td>
-                        <td class="btn-cell"><button class="btn-delete-music" name="btn-delete-${music.id}" onClick="deleteMusic(this)">apagar</button></td>
+                        <td class="btn-cell"><button class="btn-delete-music" name="btn-delete-${music.id}" onClick="deleteMusic(this)">🗑 Apagar</button></td>
                     </tr>`
                 )
             }

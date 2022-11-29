@@ -31,9 +31,7 @@ public class MusicaController {
             musicaService.salvarNovaMusica(request);
             return ResponseEntity.ok().body("Música salva com sucesso.");
         } catch (Exception e) {
-            System.out.println(e);
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 

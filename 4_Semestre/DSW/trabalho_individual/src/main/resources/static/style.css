@@ -1,0 +1,139 @@
+body {
+    margin: 10px;
+}
+
+.btn-default {
+    text-align: center;
+    padding: 10px;
+    border: solid black 1px;
+    background-color: white;
+    border-radius: 10px;
+    height: 50px;
+}
+
+.btn-default:hover:active {
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border: solid black 1px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 10px;
+}
+
+.btn-default:hover {
+    background-color: lightgrey;
+    color: rgb(68, 68, 68);
+    border: solid rgb(68, 68, 68) 1px;
+    border-radius: 10px;
+}
+
+.btn-add {
+    color: white;
+    background-color: green;
+    border: solid green 1px;
+    border-radius: 10px;
+    padding: 10px;
+    height: 50px;
+}
+
+.btn-add:hover {
+    background-color: rgb(92, 184, 92);
+    border: solid rgb(92, 184, 92) 1px;
+}
+
+.btn-add:hover:active {
+    background-color: rgb(0, 65, 0);
+    border: solid rgb(0, 65, 0) 1px;
+}
+
+.btn-delete-music {
+    color: white;
+    text-align: center;
+    background-color: red;
+    border: solid red 1px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.btn-delete-music:hover {
+    background-color: rgb(218, 74, 74);
+    border: solid rgb(218, 74, 74) 1px;
+}
+
+.btn-delete-music:hover:active {
+    background-color: rgb(112, 0, 0);
+    border: solid rgb(112, 0, 0) 1px;
+}
+
+#list-title {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    gap: 20px;
+    align-items: center;
+}
+
+#btn-new-music {
+    margin-bottom: 20px;
+}
+
+#music-table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#music-table td,
+#music-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#music-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#music-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: black;
+    color: white;
+}
+
+.btn-cell {
+    text-align: center;
+}
+
+#form-new-music-input-fields {
+    display: block;
+    padding: 5px;
+}
+
+#form-new-music-input-fields > ul {
+    list-style: none;
+    padding: 0px;
+}
+
+.input-field {
+    background-color: white;
+    border: solid black 1px;
+    border-radius: 10px;
+    height: 30px;
+    width: 400px;
+    margin: 0px 0px 10px 0px;
+    padding: 0px 10px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+#new-music-message {
+    background-color: rgb(142, 240, 142);
+    color: green;
+    border-radius: 10px;
+    margin: 10px 0px;
+    padding: 10px;
+}
