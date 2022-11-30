@@ -110,9 +110,18 @@ body {
     padding: 5px;
 }
 
-#form-new-music-input-fields > ul {
+#form-new-music-input-fields ul {
     list-style: none;
     padding: 0px;
+}
+
+#form-new-music-input-fields ul > li {
+    margin: 0px 0px 10px 0px;
+}
+
+#form-new-music-input-fields p {
+    margin: 0px;
+    color: rgb(173, 0, 0);
 }
 
 .input-field {
@@ -121,7 +130,6 @@ body {
     border-radius: 10px;
     height: 30px;
     width: 400px;
-    margin: 0px 0px 10px 0px;
     padding: 0px 10px;
 }
 

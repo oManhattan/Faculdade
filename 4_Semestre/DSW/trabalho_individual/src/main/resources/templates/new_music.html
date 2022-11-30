@@ -35,10 +35,10 @@
                     </li>
                     <li>
                         <div>
-                            <label for="ano_lancamento">Ano de lançamento</label>
+                            <label for="anoLancamento">Ano de lançamento</label>
                         </div>
                         <div>
-                            <input class="input-field" id="ano_lancamento" name="ano_lancamento" type="number"
+                            <input class="input-field" id="anoLancamento" name="anoLancamento" type="number"
                                 title="Ano de lançamento" placeholder="Preencha o ano de lançamento da música">
                         </div>
                     </li>
@@ -57,12 +57,34 @@
     const buildMusic = () => {
         const title = document.querySelector('#titulo').value
         const artist = document.querySelector('#artista').value
-        const year = parseInt(document.querySelector('#ano_lancamento').value)
+        const year = parseInt(document.querySelector('#anoLancamento').value)
         return {
             titulo: title,
             artista: artist,
             ano_lancamento: year
         }
+    }
+
+    const errorHandler = (response) => {
+        cleaerErorrFields()
+        const fields = response.replace('[', '').replace(']', '').split(',').map((item) => { return item.trim() })
+        fields.forEach((value) => {
+            const aux = value.split(':')
+            const field = document.querySelector(`#${aux[0]}`)
+
+            if (field !== null) {
+                field.style.border = 'solid rgb(173, 0, 0) 1px'
+                field.insertAdjacentHTML('afterend', `<p>${aux[1]}</p>`)
+            }
+
+        })
+    }
+
+    const cleaerErorrFields = () => {
+        const elements = document.querySelectorAll('#form-new-music-input-fields p')
+        elements.forEach((value) => {
+            value.remove()
+        })
     }
 
     const saveMusic = (event) => {
@@ -76,10 +98,7 @@
         request.onload = (event) => {
             if (request.status !== 200) {
                 const response = request.responseText
-                const fields = response.replace('[', '').replace(']', '').split(',').map((item) => {return item.trim()})
-                for (const field in fields) {
-                    console.log(field)
-                }
+                errorHandler(response)
                 return
             }
 

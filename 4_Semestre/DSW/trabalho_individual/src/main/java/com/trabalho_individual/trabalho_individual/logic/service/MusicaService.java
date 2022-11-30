@@ -29,7 +29,7 @@ public class MusicaService {
 
         Set<ConstraintViolation<MusicaRequest>> validations = validator.validate(request);
         if (validations.size() > 0) {
-            List<String> errors = validations.stream().map((v) -> v.getPropertyPath().toString()).collect(Collectors.toList());
+            List<String> errors = validations.stream().map((v) -> String.format("%s:%s", v.getPropertyPath().toString(), v.getMessage())).collect(Collectors.toList());
             throw new Exception(errors.toString());
         }
 

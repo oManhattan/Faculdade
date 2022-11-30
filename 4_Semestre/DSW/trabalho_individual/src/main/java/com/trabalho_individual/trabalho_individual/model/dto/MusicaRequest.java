@@ -23,16 +23,16 @@ import lombok.ToString;
 @JsonPropertyOrder({"titulo", "artista", "ano_lancamento"})
 public class MusicaRequest {
     
-    @NotEmpty
+    @NotEmpty(message = "Campo deve ser preenchido")
     @JsonProperty("titulo")
     private String titulo;
 
-    @NotEmpty
+    @NotEmpty(message = "Campo deve ser preenchido")
     @JsonProperty("artista")
     private String artista;
 
-    @NotNull
-    @Positive
+    @NotNull(message = "Campo deve ser preenchido")
+    @Positive(message = "Ano deve ser maior que zero")
     @JsonProperty("ano_lancamento")
     private Integer anoLancamento;
 }
